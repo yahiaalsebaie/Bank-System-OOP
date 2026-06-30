@@ -41,6 +41,10 @@ private:
 		return clsBankClient(enMode::UpdateMode, vClientData[0], vClientData[1], vClientData[2], vClientData[3], vClientData[4], vClientData[5], stof(vClientData[6]));
 	}
 
+	static clsBankClient _GetEmptyClientObject()
+	{
+		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
+	}
 
 
 public:
@@ -56,10 +60,7 @@ public:
 		_AccountBalance = AccountBalance;
 	}
 
-	bool IsEmpty()
-	{
-		return (_Mode == enMode::EmptyMode);
-	}
+	bool IsEmpty() { return (_Mode == enMode::EmptyMode); }
 
 	string AccountNumber() { return _AccountNumber; } // Get only
 
@@ -109,6 +110,37 @@ public:
 				vClients.push_back(client);
 			}
 		}
-
+		return _GetEmptyClientObject();
 	}
+	static clsBankClient Find(const string& AccountNumber, const string& PinCode)
+	{
+		vector<clsBankClient> vClients;
+
+		fstream myFile;
+		myFile.open("Clients.txt", ios::in); //Read mode
+
+		if (myFile.is_open())
+		{
+			string line;
+			while (getline(myFile, line))
+			{
+				clsBankClient client = _ConvertLineToClientObject(line);
+				if (client.AccountNumber() == AccountNumber && client.PinCode == PinCode)
+				{
+					myFile.close();
+					return client;
+				}
+				vClients.push_back(client);
+			}
+		}
+		return _GetEmptyClientObject();
+	}
+
+	static bool IsClientExist(const string& AccountNumber)
+	{
+		clsBankClient c = clsBankClient::Find(AccountNumber);
+
+		return (!c.IsEmpty());
+	}
+
 };

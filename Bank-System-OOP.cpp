@@ -20,7 +20,7 @@ int main()
 
     Client1.Print();
 
-    /*clsBankClient Client2 = clsBankClient::Find("A101", "1234");
+    clsBankClient Client2 = clsBankClient::Find("A101", "12345");
     if (!Client2.IsEmpty())
     {
         cout << "\nClient Found :-)\n";
@@ -29,7 +29,7 @@ int main()
     {
         cout << "\nClient Was Not Found :-(\n";
     }
-    Client2.Print();*/
+    Client2.Print();
 
 
   /*  cout << "\nIs Client Exist? " << clsBankClient::IsClientExist("A101");*/
