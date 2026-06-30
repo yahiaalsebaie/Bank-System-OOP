@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <string>
 #include "clsPerson.h"
@@ -21,17 +21,19 @@ private:
 	const string _UsersFileName = "Users.txt";*/
 
 
-	/*static string _ConvertClientObjectToLine(const clsBankClient& Client, string Separator = "#//#")
+	static string _ConvertClientObjectToLine(const clsBankClient& Client, string Separator = "#//#")
 	{
-		string ClientObject = "";
-		ClientObject += Client.AccountNumber + Separator;
-		ClientObject += Client.Name + Separator;
-		ClientObject += Client.Phone + Separator;
-		ClientObject += Client.PinCode + Separator;
-		ClientObject += to_string(Client.AccountBalance);
+		string ClientObj = "";
+		ClientObj += Client.FirstName + Separator;
+		ClientObj += Client.LastName + Separator;
+		ClientObj += Client.Email + Separator;
+		ClientObj += Client.Phone + Separator;
+		ClientObj += Client.AccountNumber() + Separator;
+		ClientObj += Client.PinCode + Separator;
+		ClientObj += to_string(Client.AccountBalance);
 
-		return ClientObject;
-	}*/
+		return ClientObj;
+	}
 
 
 	static clsBankClient _ConvertLineToClientObject(string Line, string Separator = "#//#")
@@ -45,7 +47,57 @@ private:
 	{
 		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
 	}
+	static vector<clsBankClient> _LoadClientsDataFromFile(string FileName )
+	{
+		vector<clsBankClient> vClients;
+		fstream myFile;
+		myFile.open(FileName, ios::in);//Read (input) mode.
 
+		if (myFile.is_open())
+		{
+			string line;
+			while (getline(myFile, line))
+			{
+				if (line == "")
+					continue;
+				clsBankClient Client = _ConvertLineToClientObject(line);
+				vClients.push_back(Client);
+			}
+			myFile.close();
+		}
+		return vClients;
+	}
+	static void _SaveClientsDataToFile(const vector<clsBankClient>& vClients)
+	{
+		fstream myFile;
+		myFile.open("Clients.txt", ios::out);
+
+		if (myFile.is_open())
+		{
+			string line;
+			for (const clsBankClient& c : vClients) //هل هنا ينفع دي تكون const & أصلاً؟ مش هي هيتم التعديل عليها!
+			{
+					line = _ConvertClientObjectToLine(c);
+					myFile << line << endl;
+			}
+			myFile.close();
+		}
+	}
+
+	void _Update()
+	{
+		vector <clsBankClient> _vClients = _LoadClientsDataFromFile("Clients.txt");
+		
+		for (clsBankClient & c : _vClients)
+		{
+			if (c.AccountNumber() == AccountNumber())
+			{
+				c = *this; // *this == updated information
+				break;
+			}
+		}
+		_SaveClientsDataToFile(_vClients);
+	}
 
 public:
 
@@ -59,17 +111,18 @@ public:
 		_PinCode = PinCode;
 		_AccountBalance = AccountBalance;
 	}
+	enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1 };
 
 	bool IsEmpty() { return (_Mode == enMode::EmptyMode); }
 
-	string AccountNumber() { return _AccountNumber; } // Get only
+	string AccountNumber() const { return _AccountNumber; } // Get only
 
 	void SetPinCode(string PinCode) { _PinCode = PinCode; }
-	string GetPinCode() { return _PinCode; }
+	string GetPinCode() const { return _PinCode; }
 	__declspec(property(get = GetPinCode, put = SetPinCode)) string PinCode;
 
 	void SetAccountBalance(float AccountBalance) { _AccountBalance = AccountBalance; };
-	float GetAccountBalance() { return _AccountBalance; }
+	float GetAccountBalance() const { return _AccountBalance; }
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
 	void Print()
@@ -149,6 +202,22 @@ public:
 		{
 			if (ErrorMessage != "") cout << ErrorMessage;
 			AccountNumber = clsInputValidate::ReadString();
+		}
+	}
+
+	enSaveResults Save()
+	{
+		switch (_Mode)
+		{
+		case clsBankClient::EmptyMode:
+			return enSaveResults::svFaildEmptyObject;
+
+		case clsBankClient::UpdateMode:
+		{
+			_Update();
+			return enSaveResults::svSucceeded;
+		}
+
 		}
 	}
 

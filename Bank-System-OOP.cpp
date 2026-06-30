@@ -46,7 +46,7 @@ void UpdateClient()
 
     
     
-    /*cout << "\n\nUpdate Client Info:";
+    cout << "\n\nUpdate Client Info:";
     cout << "\n____________________\n";
     ReadClientInfo(Client1);
 
@@ -67,9 +67,9 @@ void UpdateClient()
         cout << "\nError account was not saved because it's Empty";
         break;
 
-    }*/
+    }
 
-    /*}*/
+    }
 }
 
 int main()
