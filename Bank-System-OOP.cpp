@@ -92,17 +92,14 @@ void AddNewClient()
     saveResult = newClient.Save();
 
 
-
-
-    
-    
 }
 
 int main()
 
 {
    /* UpdateClient();*/
-    AddNewClient();
+   /* AddNewClient();*/
+    
     system("pause>0");
     return 0;
 }
