@@ -30,8 +30,6 @@ void ReadClientInfo(clsBankClient& Client)
     //Client.PerformGenderInfo(Client);
 }
 
-
-
 void UpdateClient()
 {
     string AccountNumber = "";
@@ -72,11 +70,39 @@ void UpdateClient()
     }
 }
 
+void AddNewClient()
+{
+    string AccountNumber = "";
+
+    cout << "\nPlease Enter client Account Number: ";
+    AccountNumber = clsInputValidate::ReadString();
+
+    while (clsBankClient::IsClientExist(AccountNumber))
+    {
+        cout << "\nAccount Number Is Already Used, Choose another one: ";
+        AccountNumber = clsInputValidate::ReadString();
+    }
+
+    clsBankClient newClient = clsBankClient::GetAddNewClientObject(AccountNumber);
+
+    ReadClientInfo(newClient);
+
+    clsBankClient::enSaveResults saveResult;
+
+    saveResult = newClient.Save();
+
+
+
+
+    
+    
+}
+
 int main()
 
 {
-    UpdateClient();
-
+   /* UpdateClient();*/
+    AddNewClient();
     system("pause>0");
     return 0;
 }
