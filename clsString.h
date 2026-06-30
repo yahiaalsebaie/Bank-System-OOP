@@ -90,7 +90,7 @@ public:
 	static string ReadString(string Message)
 	{
 		string s1;
-		cout << Message;
+		        if (Message != "") cout << Message;;
 		getline(cin, s1);
 		return s1;
 	}

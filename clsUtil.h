@@ -268,7 +268,7 @@ public:
         string t = "";
 
         for (int i = 0; i < NumberOfTabs; i++)
-            t += "\t";
+            t += " ";
 
         return t;
     }

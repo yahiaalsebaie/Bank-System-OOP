@@ -1,6 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <string>
+#include "clsInputValidate.h"
+
 using namespace std;
 
 class clsPerson
@@ -12,6 +14,13 @@ private:
     string _LastName;
     string _Email;
     string _Phone;
+
+
+protected:
+    enum enGender { Male = 0, Female = 1 };
+    enGender _Gender;
+    enum enMartialStatus { Single = 0, Married = 1 };
+    enMartialStatus _MartialStatus;
 
 public:
 
@@ -93,6 +102,129 @@ public:
         cout << "\n___________________\n";
 
     }
+
+    static void PerformFullNameInfo(clsPerson& Person, string ErrorMessage = "Invalid Name, Please Enter a Valid Name [without any spatial characters] : ")
+    {
+        string Name = clsInputValidate::ReadString(); // read full name with spaces
+        while (!clsInputValidate::IsValidName(Name))
+        {
+            if (ErrorMessage != "") cout << ErrorMessage;
+            Name = clsInputValidate::ReadString();
+        }
+
+        // Split into first and last name (first token -> FirstName, rest -> LastName)
+        short pos = Name.find(' ');
+        if (pos == string::npos)
+        {
+            Person.FirstName = Name;
+            Person.LastName = "";
+        }
+        else
+        {
+            Person.FirstName = Name.substr(0, pos);
+            // trim leading spaces of last name part
+            short start = pos + 1;
+            while (start < Name.size() && Name[start] == ' ') ++start;
+            Person.LastName = (start < Name.size()) ? Name.substr(start) : "";
+        }
+    }
+
+    static void PerformFirstName(clsPerson& Person, string ErrorMessage = "Invalid Name, Please Enter a Valid Name [without any spatial characters] : ")
+    {
+        string Name = clsInputValidate::ReadString();
+        while (!clsInputValidate::IsValidName(Name))
+        {
+            if (ErrorMessage != "") cout << ErrorMessage;
+            Name = clsInputValidate::ReadString();
+        }
+        Person.FirstName = Name;
+    }
+
+    static void PerformLastName(clsPerson& Person, string ErrorMessage = "Invalid Name, Please Enter a Valid Name [without any numbers or spatial characters] : ")
+    {
+        string Name = clsInputValidate::ReadString();
+        while (!clsInputValidate::IsValidName(Name))
+        {
+            if (ErrorMessage != "") cout << ErrorMessage;
+            Name = clsInputValidate::ReadString();
+        }
+        Person.LastName = Name;
+    }
+   
+    static void PerformEmail(clsPerson& Person, string ErrorMessage = "Invalid Email, Please Enter a Valid Email : ")
+    {
+        do
+        {
+            Person.Email = clsInputValidate::ReadString();
+            if (!clsInputValidate::IsValidEmail(Person.Email))
+                if (ErrorMessage != "") cout << ErrorMessage;
+            
+        } while (!clsInputValidate::IsValidEmail(Person.Email));
+    }
+    static void PerformPhone(clsPerson& Person, string ErrorMessage = "Invalid Phone Number, Please Enter a Valid Phone Number : ")
+    {
+        do
+        {
+            Person.Phone = clsInputValidate::ReadString();
+                if (!clsInputValidate::IsValidPhone(Person.Phone))
+                    if (ErrorMessage != "") cout << ErrorMessage;
+                
+
+        } while (!clsInputValidate::IsValidPhone(Person.Phone));
+    }
+   
+    static void PerformGenderInfo(clsPerson& Person, string ErrorMessage = "Invalid Gender, Please Enter [M Or F Only] : ")
+    {
+        char Gender;
+
+        do
+        {
+            cin >> Gender;
+            if (Gender == 'M' || Gender == 'm' || Gender == '0')
+            {
+                Person._Gender = Male;
+                break;
+            }
+            else if (Gender == 'f' || Gender == 'F' || Gender == '1')
+            {
+                Person._Gender = Female;
+                break;
+            }
+            else
+            {
+                if (ErrorMessage != "") cout << ErrorMessage;
+            }
+            cin.ignore(1000, '\n');
+        } while (true);
+
+
+    }
+    static void PerformMartialState(clsPerson& Person, string ErrorMessage = "Invalid Marital Status, Please Enter [1 Or 0 Only] : ")
+    {
+        short IsMarried;
+        do
+        {
+            cin >> IsMarried;
+            if (IsMarried == 1)
+            {
+                Person._MartialStatus = Married;
+                break;
+            }
+            else if (IsMarried == 0)
+            {
+                Person._MartialStatus = Single;
+                break;
+            }
+            else
+            {
+                if (ErrorMessage != "") cout << ErrorMessage;
+            }
+            cin.ignore(1000, '\n');
+        } while (true);
+
+
+    }
+
 
 };
 

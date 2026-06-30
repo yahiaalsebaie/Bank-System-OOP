@@ -23,7 +23,7 @@ public:
     {
     //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
         int Number = 0;
-        cout << Message;
+                if (Message != "") cout << Message;;
         cin >> Number;
         while (cin.fail())
         {
@@ -38,11 +38,11 @@ public:
     // -----------------------------------------------------------------------
     //  Float
     // -----------------------------------------------------------------------
-    static float ReadFloatNumber(string Message, string ErrorMessage = "Invalid Number, Enter a valid one : ")
+    static float ReadFloatNumber(string Message = "", string ErrorMessage = "Invalid Number, Enter a valid one : ")
     {
     //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
         float Number = 0;
-        cout << Message;
+                if (Message != "") cout << Message;;
         cin >> Number;
         while (cin.fail())
         {
@@ -56,11 +56,11 @@ public:
     // -----------------------------------------------------------------------
     //  Double
     // -----------------------------------------------------------------------
-    static double ReadDblNumber(string Message, string ErrorMessage = "Invalid Number, Enter a valid one : ")
+    static double ReadDblNumber(string Message = "", string ErrorMessage = "Invalid Number, Enter a valid one : ")
     {
     //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
         float Number = 0;
-        cout << Message;
+                if (Message != "") cout << Message;;
         cin >> Number;
         while (cin.fail())
         {
@@ -75,13 +75,13 @@ public:
     // -----------------------------------------------------------------------
     //  Positive integer (> 0)
     // -----------------------------------------------------------------------
-    static int ReadPositiveNumber(string Message)
+    static int ReadPositiveNumber(string Message = "")
     {
    //     cin.ignore(numeric_limits<streamsize>::max(), '\n');
         int Number = 0;
         do
         {
-            cout << Message;
+                    if (Message != "") cout << Message;;
             cin >> Number;
             while (cin.fail())
             {
@@ -105,7 +105,7 @@ public:
         unsigned long long Number = 0;
         do
         {
-            cout << Message;
+                    if (Message != "") cout << Message;;
             cin >> ws;
             if (cin.peek() == '-')
                 cin.setstate(ios::failbit);
@@ -138,7 +138,7 @@ public:
         long long Number = 0;
         do
         {
-            cout << Message;
+                    if (Message != "") cout << Message;;
             cin >> Number;
             while (cin.fail())
             {
@@ -204,11 +204,10 @@ public:
     // -----------------------------------------------------------------------
     //  Full-line string
     // -----------------------------------------------------------------------
-    static string ReadText(string Message)
+    static string ReadString(string Message = "")
     {
-       // cin.ignore(numeric_limits<streamsize>::max(), '\n');
         string Text = "";
-        cout << Message;
+        if (Message != "") cout << Message;
         getline(cin >> ws, Text);
         return Text;
     }

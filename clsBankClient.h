@@ -143,4 +143,13 @@ public:
 		return (!c.IsEmpty());
 	}
 
+	static void PerformAccountNumber(string AccountNumber, string ErrorMessage = "\nAccount number is not found, choose another one: ")
+	{
+		while (!clsBankClient::IsClientExist(AccountNumber))
+		{
+			if (ErrorMessage != "") cout << ErrorMessage;
+			AccountNumber = clsInputValidate::ReadString();
+		}
+	}
+
 };
