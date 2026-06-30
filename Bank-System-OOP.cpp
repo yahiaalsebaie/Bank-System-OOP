@@ -1,9 +1,10 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 #include <cstdlib>
 #include "clsPerson.h"
+#include "clsUtil.h"
 
 using namespace std;
 
@@ -47,7 +48,7 @@ void UpdateClient()
     
     
     cout << "\n\nUpdate Client Info:";
-    cout << "\n____________________\n";
+    cout << clsUtil::RedText("\n____________________\n");
     ReadClientInfo(Client1);
 
     clsBankClient::enSaveResults SaveResult;
@@ -64,7 +65,7 @@ void UpdateClient()
     }
     case clsBankClient::enSaveResults::svFaildEmptyObject:
     {
-        cout << "\nError account was not saved because it's Empty";
+        cout << clsUtil::RedText("\nError account was not saved because it's Empty");
         break;
 
     }
@@ -81,7 +82,7 @@ void AddNewClient()
 
     while (clsBankClient::IsClientExist(AccountNumber))
     {
-        cout << "\nAccount Number Is Already Used, Choose another one: ";
+        cout << clsUtil::RedText("\nAccount Number Is Already Used, Choose another one: ");
         AccountNumber = clsInputValidate::ReadString();
     }
 
@@ -109,18 +110,18 @@ void DeleteClient()
     Client1.Print();
 
     char Answer = 'n';
-    cout << "\nAre you sure you want to Delete this Client ? [Y/N] >> ";
+    cout << clsUtil::RedText("\nAre you sure you want to Delete this Client ? [Y/N] >> ");
     cin >> Answer;
 
     if (Answer == 'Y' || Answer == 'y')
     {
         if (Client1.Delete())
         {
-            cout << "\nClient Deleted Successfully.\n";
+            cout << clsUtil::GreenText("\nClient Deleted Successfully.\n");
             Client1.Print();
         }
 
-    else cout << "\nError: Client Not Deleted.\n";
+        else  cout << clsUtil::RedText("\nError: Client Not Deleted.\n");
     }
 
 }
@@ -133,6 +134,7 @@ int main()
     //UpdateClient();
     //AddNewClient();
     DeleteClient();
+   
 
     system("pause>0");
     return 0;

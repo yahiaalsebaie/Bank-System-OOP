@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #pragma warning(disable : 4996)
 
 #include <ctime>
@@ -11,7 +11,66 @@ class clsUtil
 {
 public:
 
+
     enum enCharType { SmallLetter = 1, CapitalLetter = 2, SpecialChar = 3, Digit = 4, MixChars = 5 };
+    //---colors declaration
+    static const string RED;
+    static const string GREEN;
+    static const string YELLOW;
+    static const string BLUE;
+    static const string MAGENTA;
+    static const string CYAN;
+    static const string WHITE;
+    static const string BLACK;
+    static const string RESET;
+
+    //---color functions
+    static string ColorText(const string& Text, const string& Color)
+    {
+        return Color + Text + RESET;
+    }
+
+    static string RedText(const string& Text)
+    {
+        return RED + Text + RESET;
+    }
+
+    static string GreenText(const string& Text)
+    {
+        return GREEN + Text + RESET;
+    }
+
+    static string BlueText(const string& Text)
+    {
+        return BLUE + Text + RESET;
+    }
+
+    static string YellowText(const string& Text)
+    {
+        return YELLOW + Text + RESET;
+    }
+
+    static string MagentaText(const string& Text)
+    {
+        return MAGENTA + Text + RESET;
+    }
+
+    static string CyanText(const string& Text)
+    {
+        return CYAN + Text + RESET;
+    }
+
+    static void PrintColoredText(const string& Text, const string& Color)
+    {
+        cout << Color << Text << RESET;
+    }
+
+    static void PrintColoredTextLine(const string& Text, const string& Color)
+    {
+        cout << Color << Text << RESET << endl;
+    }
+    //---End of color functions---
+
     static void  Srand()
     {
         //Seeds the random number generator in C++, called only once
@@ -292,4 +351,15 @@ public:
 
 
 };
+//colors declaration values should be outside class
+const string clsUtil::RED = "\033[31m";
+const string clsUtil::GREEN = "\033[32m";
+const string clsUtil::YELLOW = "\033[33m";
+const string clsUtil::BLUE = "\033[34m";
+const string clsUtil::MAGENTA = "\033[35m";
+const string clsUtil::CYAN = "\033[36m";
+const string clsUtil::WHITE = "\033[37m";
+const string clsUtil::BLACK = "\033[30m";
+const string clsUtil::RESET = "\033[0m";
+//--------------------------------------
 

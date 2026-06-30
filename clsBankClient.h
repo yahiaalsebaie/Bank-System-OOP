@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include "clsInputValidate.h"
+#include "clsUtil.h"
 
 using namespace std;
 class clsBankClient : public clsPerson
@@ -222,7 +223,7 @@ public:
 	{
 		while (!clsBankClient::IsClientExist(AccountNumber))
 		{
-			if (ErrorMessage != "") cout << ErrorMessage;
+			if (ErrorMessage != "") cout << clsUtil::RedText(ErrorMessage);
 			AccountNumber = clsInputValidate::ReadString();
 		}
 	}
