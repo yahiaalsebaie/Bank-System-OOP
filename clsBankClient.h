@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include <vector>
 #include <fstream>
+#include "clsInputValidate.h"
 
 using namespace std;
 class clsBankClient : public clsPerson
@@ -16,6 +17,7 @@ private:
 	string _AccountNumber;
 	string _PinCode;
 	float _AccountBalance;
+	bool _MarkForDelete = false;
 
 	/*const string _ClientsFileName = "Clients.txt";
 	const string _UsersFileName = "Users.txt";*/
@@ -47,7 +49,7 @@ private:
 	{
 		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
 	}
-	static vector<clsBankClient> _LoadClientsDataFromFile(string FileName )
+	static vector<clsBankClient> _LoadClientsDataFromFile(string FileName = "Clients.txt")
 	{
 		vector<clsBankClient> vClients;
 		fstream myFile;
@@ -69,20 +71,25 @@ private:
 	}
 	static void _SaveClientsDataToFile(const vector<clsBankClient>& vClients)
 	{
+		string FileName = "Clients.txt";
 		fstream myFile;
-		myFile.open("Clients.txt", ios::out);
+		myFile.open(FileName, ios::out);
 
 		if (myFile.is_open())
 		{
 			string line;
-			for (const clsBankClient& c : vClients) //هل هنا ينفع دي تكون const & أصلاً؟ مش هي هيتم التعديل عليها!
+			for (const clsBankClient& c : vClients)
 			{
+				if (c._MarkForDelete == false)
+				{
 					line = _ConvertClientObjectToLine(c);
 					myFile << line << endl;
+				}
 			}
 			myFile.close();
 		}
 	}
+
 	static void _AddDataLineToFile(string FileName, const string DataLine)
 	{
 		fstream myFile;
@@ -211,7 +218,7 @@ public:
 		return (!c.IsEmpty());
 	}
 
-	static void PerformAccountNumber(string AccountNumber, string ErrorMessage = "\nAccount number is not found, choose another one: ")
+	static void PerformIsClientAccountNumberExist(string AccountNumber, string ErrorMessage = "\nAccount number is not found, choose another one: ")
 	{
 		while (!clsBankClient::IsClientExist(AccountNumber))
 		{
@@ -246,5 +253,24 @@ public:
 	{
 		return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
 	}
+
+	//--Delete--//
+	bool Delete()
+	{
+		vector <clsBankClient> _vClients = _LoadClientsDataFromFile();
+
+		for (clsBankClient& c : _vClients)
+		{
+			if (_AccountNumber == c._AccountNumber)
+			{
+				c._MarkForDelete = true;
+				break;
+			}
+		}
+		_SaveClientsDataToFile(_vClients);
+		*this = _GetEmptyClientObject();
+		return true;
+	}
+
 
 };

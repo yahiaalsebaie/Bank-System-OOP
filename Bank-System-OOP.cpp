@@ -9,6 +9,8 @@ using namespace std;
 
 void ReadClientInfo(clsBankClient& Client)
 {
+    //Diffrent ways to get input.
+
     cout << "\nEnter FirstName: "; 
     clsPerson::PerformFirstName(Client); //Upcasting -> Zero Performance Overhead // PerformFirstName() here without any numbers or spatial characters.
 
@@ -37,7 +39,7 @@ void UpdateClient()
     cout << "\nPlease Enter client Account Number: ";
     AccountNumber = clsInputValidate::ReadString();
 
-    clsBankClient::PerformAccountNumber(AccountNumber);
+    clsBankClient::PerformIsClientAccountNumberExist(AccountNumber);
 
     clsBankClient Client1 = clsBankClient::Find(AccountNumber);
     Client1.Print();
@@ -94,12 +96,44 @@ void AddNewClient()
 
 }
 
+void DeleteClient()
+{
+    string AccountNumber = "";
+
+    cout << "\nPlease Enter client Account Number: ";
+    AccountNumber = clsInputValidate::ReadString();
+    
+    clsBankClient::PerformIsClientAccountNumberExist(AccountNumber);
+
+    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+    Client1.Print();
+
+    char Answer = 'n';
+    cout << "\nAre you sure you want to Delete this Client ? [Y/N] >> ";
+    cin >> Answer;
+
+    if (Answer == 'Y' || Answer == 'y')
+    {
+        if (Client1.Delete())
+        {
+            cout << "\nClient Deleted Successfully.\n";
+            Client1.Print();
+        }
+
+    else cout << "\nError: Client Not Deleted.\n";
+    }
+
+}
+     
+
+
 int main()
 
 {
-   /* UpdateClient();*/
-   /* AddNewClient();*/
-    
+    //UpdateClient();
+    //AddNewClient();
+    DeleteClient();
+
     system("pause>0");
     return 0;
 }
