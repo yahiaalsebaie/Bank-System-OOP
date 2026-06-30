@@ -38,5 +38,11 @@
     <ClInclude Include="clsUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsPerson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsBankClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
