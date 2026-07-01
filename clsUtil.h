@@ -10,15 +10,35 @@
 class clsUtil
 {
 public :
-    enum class enColor
+    enum class enColor : unsigned char //char == 256, colors are just 50 color.
+        //Using default int consumes 4 MB of memory...
+        //Using an unsigned char consumes only 1 MB, saved 75% of the space with just one word!..
     {
-        BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, ORANGE, PINK, PURPLE, BRIGHT_GREEN, BRIGHT_BLUE, RESET
+        // --- (Standard) ---
+        BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
+
+        // --- (Bright / Neon) ---
+        BRIGHT_BLACK, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW,
+        BRIGHT_BLUE, BRIGHT_MAGENTA, BRIGHT_CYAN, BRIGHT_WHITE,
+
+        // --- (Warm Colors) ---
+        ORANGE, DARK_ORANGE, LIGHT_ORANGE, PINK, HOT_PINK,
+        DEEP_PINK, MAROON, CRIMSON, BROWN, GOLD, BEIGE,
+
+        // --- (Cool Colors) ---
+        PURPLE, VIOLET, INDIGO, DEEP_BLUE, SKY_BLUE, LIGHT_BLUE,
+        TURQUOISE, TEAL, EMERALD, MINT, OLIVE, LIME,
+
+        // --- (Grayscale & Metallic) ---
+        DARK_GRAY, GRAY, LIGHT_GRAY, SILVER, CHARCOAL, SLATE,
+
+        RESET
     };
 
 private:
     static string _GetColorEscapeCode(enColor Color) {
         switch (Color) {
-            //Standard 16-color palette
+            //Standard 
         case enColor::BLACK:        return "\033[30m";
         case enColor::RED:          return "\033[31m";
         case enColor::GREEN:        return "\033[32m";
@@ -28,17 +48,56 @@ private:
         case enColor::CYAN:         return "\033[36m";
         case enColor::WHITE:        return "\033[37m";
 
-            // 8-bit / 256-color palette
-        case enColor::ORANGE:       return "\033[38;5;208m";
-        case enColor::PINK:         return "\033[38;5;205m";
-        case enColor::PURPLE:       return "\033[38;5;93m";
-        case enColor::BRIGHT_GREEN: return "\033[38;5;118m";
-        case enColor::BRIGHT_BLUE:  return "\033[38;5;45m";
+            // bright colors
+        case enColor::BRIGHT_BLACK:   return "\033[90m";
+        case enColor::BRIGHT_RED:     return "\033[91m";
+        case enColor::BRIGHT_GREEN:   return "\033[92m";
+        case enColor::BRIGHT_YELLOW:  return "\033[93m";
+        case enColor::BRIGHT_BLUE:    return "\033[94m";
+        case enColor::BRIGHT_MAGENTA: return "\033[95m";
+        case enColor::BRIGHT_CYAN:    return "\033[96m";
+        case enColor::BRIGHT_WHITE:   return "\033[97m";
+
+            // warm shades
+        case enColor::ORANGE:         return "\033[38;5;208m";
+        case enColor::DARK_ORANGE:    return "\033[38;5;166m";
+        case enColor::LIGHT_ORANGE:   return "\033[38;5;215m";
+        case enColor::PINK:           return "\033[38;5;211m";
+        case enColor::HOT_PINK:       return "\033[38;5;205m";
+        case enColor::DEEP_PINK:      return "\033[38;5;198m";
+        case enColor::MAROON:         return "\033[38;5;88m";
+        case enColor::CRIMSON:        return "\033[38;5;160m";
+        case enColor::BROWN:          return "\033[38;5;94m";
+        case enColor::GOLD:           return "\033[38;5;220m";
+        case enColor::BEIGE:          return "\033[38;5;223m";
+
+            // cool gradients
+        case enColor::PURPLE:         return "\033[38;5;93m";
+        case enColor::VIOLET:         return "\033[38;5;129m";
+        case enColor::INDIGO:         return "\033[38;5;55m";
+        case enColor::DEEP_BLUE:      return "\033[38;5;19m";
+        case enColor::SKY_BLUE:       return "\033[38;5;111m";
+        case enColor::LIGHT_BLUE:     return "\033[38;5;153m";
+        case enColor::TURQUOISE:      return "\033[38;5;43m";
+        case enColor::TEAL:           return "\033[38;5;30m";
+        case enColor::EMERALD:        return "\033[38;5;41m";
+        case enColor::MINT:           return "\033[38;5;121m";
+        case enColor::OLIVE:          return "\033[38;5;100m";
+        case enColor::LIME:           return "\033[38;5;154m";
+
+            // Grayscale & Metallic
+        case enColor::DARK_GRAY:      return "\033[38;5;236m";
+        case enColor::GRAY:           return "\033[38;5;244m";
+        case enColor::LIGHT_GRAY:     return "\033[38;5;250m";
+        case enColor::SILVER:         return "\033[38;5;7m";
+        case enColor::CHARCOAL:       return "\033[38;5;234m";
+        case enColor::SLATE:          return "\033[38;5;66m";
 
         case enColor::RESET:
-        default:                    return "\033[0m";
+        default:                      return "\033[0m";
         }
     }
+
 
 public:
 
