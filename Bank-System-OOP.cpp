@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "clsPerson.h"
 #include "clsUtil.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -125,7 +126,48 @@ void DeleteClient()
     }
 
 }
-     
+
+
+void PrintClientRecordLine(const clsBankClient& Client)
+{
+    cout << clsUtil::RedText("| ") << left << setw(15) << Client.AccountNumber();
+    cout << clsUtil::RedText("| ") << left << setw(20) << Client.FullName();
+    cout << clsUtil::RedText("| ") << left << setw(15) << Client.Phone;
+    cout << clsUtil::RedText("| ") << left << setw(25) << Client.Email;
+    cout << clsUtil::RedText("| ") << left << setw(10) << Client.PinCode;
+    cout << clsUtil::RedText("| ") << left << setw(12) << Client.AccountBalance;
+}
+void ShowClientsList()
+{
+    vector <clsBankClient> vClients = clsBankClient::GetClientsList();
+string SeparatorLine ="\n_________________________________________________________________________________________________________\n";
+
+    cout << "\n\t\t\t\t\tClient List " << clsUtil::RedText("[") << vClients.size() << clsUtil::RedText("]") << " Client(s).";
+    cout << SeparatorLine;
+
+    cout << clsUtil::RedText("| ") << left << setw(15) << "Account Number";
+    cout << clsUtil::RedText("| ") << left << setw(20) << "Client Name";
+    cout << clsUtil::RedText("| ") << left << setw(15) << "Phone";
+    cout << clsUtil::RedText("| ") << left << setw(25) << "Email";
+    cout << clsUtil::RedText("| ") << left << setw(10) << "Pin Code";
+    cout << clsUtil::RedText("| ") << left << setw(12) << "Balance";
+    cout << SeparatorLine;
+
+    if (vClients.size() == 0)
+        clsUtil::PrintColoredTextLine("\t\t\t\tNo Clients Data Available In System!", clsUtil::RED);
+        //cout << clsUtil::RedText("\t\t\t\tNo Clients Data Available In System!");
+    else
+
+        for (const clsBankClient& Client : vClients)
+        {
+
+            PrintClientRecordLine(Client);
+            cout << endl;
+        }
+
+    cout << SeparatorLine;
+
+}
 
 
 int main()
@@ -133,8 +175,8 @@ int main()
 {
     //UpdateClient();
     //AddNewClient();
-    DeleteClient();
-   
+    //DeleteClient();
+    ShowClientsList();
 
     system("pause>0");
     return 0;
