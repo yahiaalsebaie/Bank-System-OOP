@@ -6,6 +6,7 @@
 #include <string>
 #include <cstdlib>
 #include "clsDate.h"
+#include <type_traits>
 
 class clsUtil
 {
@@ -395,11 +396,10 @@ public:
     {
         cout << Spaces(NumberOfSpaces);
     }
-    
 
-    static string ConvertNumberToText(unsigned long long Number)
+    template <typename T, typename = typename std::enable_if<std::is_integral<T>::value>::type> //to avoid compile error
+    static string ConvertNumberToText(T Number)
     {
-
         if (Number == 0) return "";
 
         if (Number >= 1 && Number < 20)
@@ -418,53 +418,54 @@ public:
             return arr[Number / 10] + (Number % 10 != 0 ? " " + ConvertNumberToText(Number % 10) : "");
         }
 
+
         if (Number >= 100 && Number < 1000)
         {
             return ConvertNumberToText(Number / 100) + " Hundred" + (Number % 100 != 0 ? " " + ConvertNumberToText(Number % 100) : "");
         }
 
         // Thousands: 1,000 to 999,999
-        if (Number >= 1'000ULL && Number < 1'000'000ULL) //(unsigned long long)1000000
+       if (Number >= static_cast<T>(1000) && Number < static_cast<T>(1000000))
         {
-            return ConvertNumberToText(Number / 1'000ULL) + " Thousand" + (Number % 1'000ULL != 0 ? " " + ConvertNumberToText(Number % 1'000ULL) : "");
+            return ConvertNumberToText(Number / 1000) + " Thousand" + (Number % 1000 != 0 ? " " + ConvertNumberToText(Number % 1000) : "");
         }
 
-        // Millions: 1,000,000 to 999,999,999
-        if (Number >= 1'000'000ULL && Number < 1'000'000'000ULL)
+       // Millions: 1,000,000 to 999,999,999
+       if (Number >= static_cast<T>(1000000) && Number < static_cast<T>(1000000000))
         {
-            // Or: if (Number >= (unsigned long long)1e6 && Number < (unsigned long long)1e9)
-            return ConvertNumberToText(Number / 1'000'000ULL) + " Million" + (Number % 1'000'000ULL != 0 ? " " + ConvertNumberToText(Number % 1'000'000ULL) : "");
+            return ConvertNumberToText(Number / 1000000) + " Million" + (Number % 1000000 != 0 ? " " + ConvertNumberToText(Number % 1000000) : "");
         }
 
-        // Billions: 1,000,000,000 to 999,999,999,999
-        if (Number >= 1'000'000'000ULL && Number < 1'000'000'000'000ULL)
+       // Billions: 1,000,000,000 to 999,999,999,999
+       if (Number >= static_cast<T>(1000000000) && Number < static_cast<T>(1000000000000ULL))
         {
-            return ConvertNumberToText(Number / 1'000'000'000ULL) + " Billion" + (Number % 1'000'000'000ULL != 0 ? " " + ConvertNumberToText(Number % 1'000'000'000ULL) : "");
+            return ConvertNumberToText(Number / 1000000000) + " Billion" + (Number % 1000000000 != 0 ? " " + ConvertNumberToText(Number % 1000000000) : "");
         }
 
-        // Trillions: 1,000,000,000,000 to 999,999,999,999,999
-        if (Number >= 1'000'000'000'000ULL && Number < 1'000'000'000'000'000ULL)
+       // Trillions: 1,000,000,000,000 to 999,999,999,999,999
+        if (Number >= static_cast<T>(1000000000000ULL) && Number < static_cast<T>(1000000000000000ULL))
         {
-            return ConvertNumberToText(Number / 1'000'000'000'000ULL) + " Trillion" + (Number % 1'000'000'000'000ULL != 0 ? " " + ConvertNumberToText(Number % 1'000'000'000'000ULL) : "");
+            return ConvertNumberToText(Number / 1000000000000ULL) + " Trillion" + (Number % 1000000000000ULL != 0 ? " " + ConvertNumberToText(Number % 1000000000000ULL) : "");
         }
 
         // Quadrillions: 1,000,000,000,000,000 to 999,999,999,999,999,999
-        if (Number >= 1'000'000'000'000'000ULL && Number < 1'000'000'000'000'000'000ULL)
+        if (Number >= static_cast<T>(1000000000000000ULL) && Number < static_cast<T>(1000000000000000000ULL))
         {
-            return ConvertNumberToText(Number / 1'000'000'000'000'000ULL) + " Quadrillion" + (Number % 1'000'000'000'000'000ULL != 0 ? " " + ConvertNumberToText(Number % 1'000'000'000'000'000ULL) : "");
+            return ConvertNumberToText(Number / 1000000000000000ULL) + " Quadrillion" + (Number % 1000000000000000ULL != 0 ? " " + ConvertNumberToText(Number % 1000000000000000ULL) : "");
         }
 
         // Quintillions: 1,000,000,000,000,000,000 to 9,223,372,036,854,775,807 
-       // unsigned long long int RealMaxNumber = 18'446'744'073'709'551'615ULL;
-        if (Number >= 1'000'000'000'000'000'000ULL && Number <= 18'446'744'073'709'551'615ULL)
+   // unsigned long long int RealMaxNumber = 18'446'744'073'709'551'615ULL;
+        if (Number >= static_cast<T>(1000000000000000000ULL))
         {
-            return ConvertNumberToText(Number / 1'000'000'000'000'000'000ULL) + " Quintillion" + (Number % 1'000'000'000'000'000'000ULL != 0 ? " " + ConvertNumberToText(Number % 1'000'000'000'000'000'000ULL) : "");
+            return ConvertNumberToText(Number / 1000000000000000000ULL) + " Quintillion" + (Number % 1000000000000000000ULL != 0 ? " " + ConvertNumberToText(Number % 1000000000000000000ULL) : "");
         }
 
         return "Out of range...";
     }
 
-    string ConvertNumberTo1eNum(unsigned long long number)
+    template <typename T>
+   static string ConvertNumberTo1eNum(/*unsigned long long*/ T number)
     {
         if (number == 0) return "0e0";
         short count = 0;

@@ -174,8 +174,15 @@ int main()
     //UpdateClient();
     //AddNewClient();
     //DeleteClient();
-    ShowClientsList();
+    //ShowClientsList();
 
-    system("pause>0");
+    int number = 1589594210;
+     string txt = clsUtil::ConvertNumberToText<unsigned long long>(number);
+     if (txt == "") {
+         cout << "Zero" << endl;
+     }
+     else {
+         cout << txt << endl;
+     }    system("pause>0");
     return 0;
 }
