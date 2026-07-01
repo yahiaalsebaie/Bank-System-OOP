@@ -9,67 +9,55 @@
 
 class clsUtil
 {
+public :
+    enum class enColor
+    {
+        BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, ORANGE, PINK, PURPLE, BRIGHT_GREEN, BRIGHT_BLUE, RESET
+    };
+
+private:
+    static string _GetColorEscapeCode(enColor Color) {
+        switch (Color) {
+            //Standard 16-color palette
+        case enColor::BLACK:        return "\033[30m";
+        case enColor::RED:          return "\033[31m";
+        case enColor::GREEN:        return "\033[32m";
+        case enColor::YELLOW:       return "\033[33m";
+        case enColor::BLUE:         return "\033[34m";
+        case enColor::MAGENTA:      return "\033[35m";
+        case enColor::CYAN:         return "\033[36m";
+        case enColor::WHITE:        return "\033[37m";
+
+            // 8-bit / 256-color palette
+        case enColor::ORANGE:       return "\033[38;5;208m";
+        case enColor::PINK:         return "\033[38;5;205m";
+        case enColor::PURPLE:       return "\033[38;5;93m";
+        case enColor::BRIGHT_GREEN: return "\033[38;5;118m";
+        case enColor::BRIGHT_BLUE:  return "\033[38;5;45m";
+
+        case enColor::RESET:
+        default:                    return "\033[0m";
+        }
+    }
+
 public:
 
+    static string ColorText(const string& Text, enColor Color) {
+        return _GetColorEscapeCode(Color) + Text + _GetColorEscapeCode(enColor::RESET);
+    }
+
+    static void PrintColoredText(const string& Text, enColor Color) {
+        cout << _GetColorEscapeCode(Color) << Text << _GetColorEscapeCode(enColor::RESET);
+    }
+
+    static void PrintColoredTextLine(const string& Text, enColor Color) {
+        cout << _GetColorEscapeCode(Color) << Text << _GetColorEscapeCode(enColor::RESET) << endl;
+    }
+
+public:
 
     enum enCharType { SmallLetter = 1, CapitalLetter = 2, SpecialChar = 3, Digit = 4, MixChars = 5 };
-    //---colors declaration
-    static const string RED;
-    static const string GREEN;
-    static const string YELLOW;
-    static const string BLUE;
-    static const string MAGENTA;
-    static const string CYAN;
-    static const string WHITE;
-    static const string BLACK;
-    static const string RESET;
-
-    //---color functions
-    static string ColorText(const string& Text, const string& Color)
-    {
-        return Color + Text + RESET;
-    }
-
-    static string RedText(const string& Text)
-    {
-        return RED + Text + RESET;
-    }
-
-    static string GreenText(const string& Text)
-    {
-        return GREEN + Text + RESET;
-    }
-
-    static string BlueText(const string& Text)
-    {
-        return BLUE + Text + RESET;
-    }
-
-    static string YellowText(const string& Text)
-    {
-        return YELLOW + Text + RESET;
-    }
-
-    static string MagentaText(const string& Text)
-    {
-        return MAGENTA + Text + RESET;
-    }
-
-    static string CyanText(const string& Text)
-    {
-        return CYAN + Text + RESET;
-    }
-
-    static void PrintColoredText(const string& Text, const string& Color)
-    {
-        cout << Color << Text << RESET;
-    }
-
-    static void PrintColoredTextLine(const string& Text, const string& Color)
-    {
-        cout << Color << Text << RESET << endl;
-    }
-    //---End of color functions---
+   
 
     static void  Srand()
     {
@@ -351,15 +339,5 @@ public:
 
 
 };
-//colors declaration values should be outside class
-const string clsUtil::RED = "\033[31m";
-const string clsUtil::GREEN = "\033[32m";
-const string clsUtil::YELLOW = "\033[33m";
-const string clsUtil::BLUE = "\033[34m";
-const string clsUtil::MAGENTA = "\033[35m";
-const string clsUtil::CYAN = "\033[36m";
-const string clsUtil::WHITE = "\033[37m";
-const string clsUtil::BLACK = "\033[30m";
-const string clsUtil::RESET = "\033[0m";
-//--------------------------------------
+
 

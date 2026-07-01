@@ -49,7 +49,7 @@ void UpdateClient()
     
     
     cout << "\n\nUpdate Client Info:";
-    cout << clsUtil::RedText("\n____________________\n");
+    cout << clsUtil::ColorText("\n____________________\n",clsUtil::enColor::GREEN);
     ReadClientInfo(Client1);
 
     clsBankClient::enSaveResults SaveResult;
@@ -66,7 +66,7 @@ void UpdateClient()
     }
     case clsBankClient::enSaveResults::svFaildEmptyObject:
     {
-        cout << clsUtil::RedText("\nError account was not saved because it's Empty");
+        cout << clsUtil::ColorText("\nError account was not saved because it's Empty", clsUtil::enColor::RED);
         break;
 
     }
@@ -83,7 +83,7 @@ void AddNewClient()
 
     while (clsBankClient::IsClientExist(AccountNumber))
     {
-        cout << clsUtil::RedText("\nAccount Number Is Already Used, Choose another one: ");
+        cout << clsUtil::ColorText("\nAccount Number Is Already Used, Choose another one: ", clsUtil::enColor::ORANGE);
         AccountNumber = clsInputValidate::ReadString();
     }
 
@@ -111,18 +111,18 @@ void DeleteClient()
     Client1.Print();
 
     char Answer = 'n';
-    cout << clsUtil::RedText("\nAre you sure you want to Delete this Client ? [Y/N] >> ");
+    cout << clsUtil::ColorText("\nAre you sure you want to Delete this Client ? [Y/N] >> ", clsUtil::enColor::RED);
     cin >> Answer;
 
     if (Answer == 'Y' || Answer == 'y')
     {
         if (Client1.Delete())
         {
-            cout << clsUtil::GreenText("\nClient Deleted Successfully.\n");
+            cout << clsUtil::ColorText("\nClient Deleted Successfully.\n", clsUtil::enColor::BRIGHT_GREEN);
             Client1.Print();
         }
 
-        else  cout << clsUtil::RedText("\nError: Client Not Deleted.\n");
+        else  cout << clsUtil::ColorText("\nError: Client Not Deleted.\n", clsUtil::enColor::RED);
     }
 
 }
@@ -130,42 +130,40 @@ void DeleteClient()
 
 void PrintClientRecordLine(const clsBankClient& Client)
 {
-    cout << clsUtil::RedText("| ") << left << setw(15) << Client.AccountNumber();
-    cout << clsUtil::RedText("| ") << left << setw(20) << Client.FullName();
-    cout << clsUtil::RedText("| ") << left << setw(15) << Client.Phone;
-    cout << clsUtil::RedText("| ") << left << setw(25) << Client.Email;
-    cout << clsUtil::RedText("| ") << left << setw(10) << Client.PinCode;
-    cout << clsUtil::RedText("| ") << left << setw(12) << Client.AccountBalance;
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(15) << Client.AccountNumber();
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(20) << Client.FullName();
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(15) << Client.Phone;
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(25) << Client.Email;
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(10) << Client.PinCode;
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(12) << Client.AccountBalance;
 }
 void ShowClientsList()
 {
     vector <clsBankClient> vClients = clsBankClient::GetClientsList();
-string SeparatorLine ="\n_________________________________________________________________________________________________________\n";
+string SeparatorLine = "\n_________________________________________________________________________________________________________\n";
+string ClientsNumber = to_string(vClients.size());
+cout << "\n\t\t\t\t\tClient List " << clsUtil::ColorText("[", clsUtil::enColor::RED) << clsUtil::ColorText(ClientsNumber, clsUtil::enColor::YELLOW) << clsUtil::ColorText("]", clsUtil::enColor::RED) << " Client(s).";
+cout << clsUtil::ColorText(SeparatorLine, clsUtil::enColor::YELLOW);
 
-    cout << "\n\t\t\t\t\tClient List " << clsUtil::RedText("[") << vClients.size() << clsUtil::RedText("]") << " Client(s).";
-    cout << SeparatorLine;
-
-    cout << clsUtil::RedText("| ") << left << setw(15) << "Account Number";
-    cout << clsUtil::RedText("| ") << left << setw(20) << "Client Name";
-    cout << clsUtil::RedText("| ") << left << setw(15) << "Phone";
-    cout << clsUtil::RedText("| ") << left << setw(25) << "Email";
-    cout << clsUtil::RedText("| ") << left << setw(10) << "Pin Code";
-    cout << clsUtil::RedText("| ") << left << setw(12) << "Balance";
-    cout << SeparatorLine;
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(15) << "Account Number";
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(20) << "Client Name";
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(15) << "Phone";
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(25) << "Email";
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(10) << "Pin Code";
+    cout << clsUtil::ColorText("| ",clsUtil::enColor::RED) << left << setw(12) << "Balance";
+    cout << clsUtil::ColorText(SeparatorLine, clsUtil::enColor::YELLOW);
 
     if (vClients.size() == 0)
-        clsUtil::PrintColoredTextLine("\t\t\t\tNo Clients Data Available In System!", clsUtil::RED);
-        //cout << clsUtil::RedText("\t\t\t\tNo Clients Data Available In System!");
+        clsUtil::PrintColoredTextLine("\t\t\t\tNo Clients Data Available In System!", clsUtil::enColor::RED);
     else
 
         for (const clsBankClient& Client : vClients)
         {
-
             PrintClientRecordLine(Client);
             cout << endl;
         }
 
-    cout << SeparatorLine;
+    cout << clsUtil::ColorText(SeparatorLine, clsUtil::enColor::YELLOW);
 
 }
 
