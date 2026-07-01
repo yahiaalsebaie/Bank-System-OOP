@@ -277,4 +277,16 @@ public:
 	{
 		return _LoadClientsDataFromFile();
 	}
+
+	static double GetTotalBalances(const vector <clsBankClient>& vClients)
+	{
+		double totalBalances = 0;
+
+		for (const clsBankClient& c : vClients)
+		{
+			totalBalances += c.AccountBalance;
+		}
+		return totalBalances;
+
+	}
 };
