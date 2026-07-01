@@ -9,67 +9,114 @@
 
 class clsUtil
 {
+public :
+    enum class enColor : unsigned char //char == 256, colors are just 50 color.
+        //Using default int consumes 4 MB of memory...
+        //Using an unsigned char consumes only 1 MB, saved 75% of the space with just one word!..
+    {
+        // --- (Standard) ---
+        BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
+
+        // --- (Bright / Neon) ---
+        BRIGHT_BLACK, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW,
+        BRIGHT_BLUE, BRIGHT_MAGENTA, BRIGHT_CYAN, BRIGHT_WHITE,
+
+        // --- (Warm Colors) ---
+        ORANGE, DARK_ORANGE, LIGHT_ORANGE, PINK, HOT_PINK,
+        DEEP_PINK, MAROON, CRIMSON, BROWN, GOLD, BEIGE,
+
+        // --- (Cool Colors) ---
+        PURPLE, VIOLET, INDIGO, DEEP_BLUE, SKY_BLUE, LIGHT_BLUE,
+        TURQUOISE, TEAL, EMERALD, MINT, OLIVE, LIME,
+
+        // --- (Grayscale & Metallic) ---
+        DARK_GRAY, GRAY, LIGHT_GRAY, SILVER, CHARCOAL, SLATE,
+
+        RESET
+    };
+
+private:
+    static string _GetColorEscapeCode(enColor Color) {
+        switch (Color) {
+            //Standard 
+        case enColor::BLACK:        return "\033[30m";
+        case enColor::RED:          return "\033[31m";
+        case enColor::GREEN:        return "\033[32m";
+        case enColor::YELLOW:       return "\033[33m";
+        case enColor::BLUE:         return "\033[34m";
+        case enColor::MAGENTA:      return "\033[35m";
+        case enColor::CYAN:         return "\033[36m";
+        case enColor::WHITE:        return "\033[37m";
+
+            // bright colors
+        case enColor::BRIGHT_BLACK:   return "\033[90m";
+        case enColor::BRIGHT_RED:     return "\033[91m";
+        case enColor::BRIGHT_GREEN:   return "\033[92m";
+        case enColor::BRIGHT_YELLOW:  return "\033[93m";
+        case enColor::BRIGHT_BLUE:    return "\033[94m";
+        case enColor::BRIGHT_MAGENTA: return "\033[95m";
+        case enColor::BRIGHT_CYAN:    return "\033[96m";
+        case enColor::BRIGHT_WHITE:   return "\033[97m";
+
+            // warm shades
+        case enColor::ORANGE:         return "\033[38;5;208m";
+        case enColor::DARK_ORANGE:    return "\033[38;5;166m";
+        case enColor::LIGHT_ORANGE:   return "\033[38;5;215m";
+        case enColor::PINK:           return "\033[38;5;211m";
+        case enColor::HOT_PINK:       return "\033[38;5;205m";
+        case enColor::DEEP_PINK:      return "\033[38;5;198m";
+        case enColor::MAROON:         return "\033[38;5;88m";
+        case enColor::CRIMSON:        return "\033[38;5;160m";
+        case enColor::BROWN:          return "\033[38;5;94m";
+        case enColor::GOLD:           return "\033[38;5;220m";
+        case enColor::BEIGE:          return "\033[38;5;223m";
+
+            // cool gradients
+        case enColor::PURPLE:         return "\033[38;5;93m";
+        case enColor::VIOLET:         return "\033[38;5;129m";
+        case enColor::INDIGO:         return "\033[38;5;55m";
+        case enColor::DEEP_BLUE:      return "\033[38;5;19m";
+        case enColor::SKY_BLUE:       return "\033[38;5;111m";
+        case enColor::LIGHT_BLUE:     return "\033[38;5;153m";
+        case enColor::TURQUOISE:      return "\033[38;5;43m";
+        case enColor::TEAL:           return "\033[38;5;30m";
+        case enColor::EMERALD:        return "\033[38;5;41m";
+        case enColor::MINT:           return "\033[38;5;121m";
+        case enColor::OLIVE:          return "\033[38;5;100m";
+        case enColor::LIME:           return "\033[38;5;154m";
+
+            // Grayscale & Metallic
+        case enColor::DARK_GRAY:      return "\033[38;5;236m";
+        case enColor::GRAY:           return "\033[38;5;244m";
+        case enColor::LIGHT_GRAY:     return "\033[38;5;250m";
+        case enColor::SILVER:         return "\033[38;5;7m";
+        case enColor::CHARCOAL:       return "\033[38;5;234m";
+        case enColor::SLATE:          return "\033[38;5;66m";
+
+        case enColor::RESET:
+        default:                      return "\033[0m";
+        }
+    }
+
+
 public:
 
+    static string ColorText(const string& Text, enColor Color) {
+        return _GetColorEscapeCode(Color) + Text + _GetColorEscapeCode(enColor::RESET);
+    }
+
+    static void PrintColoredText(const string& Text, enColor Color) {
+        cout << _GetColorEscapeCode(Color) << Text << _GetColorEscapeCode(enColor::RESET);
+    }
+
+    static void PrintColoredTextLine(const string& Text, enColor Color) {
+        cout << _GetColorEscapeCode(Color) << Text << _GetColorEscapeCode(enColor::RESET) << endl;
+    }
+
+public:
 
     enum enCharType { SmallLetter = 1, CapitalLetter = 2, SpecialChar = 3, Digit = 4, MixChars = 5 };
-    //---colors declaration
-    static const string RED;
-    static const string GREEN;
-    static const string YELLOW;
-    static const string BLUE;
-    static const string MAGENTA;
-    static const string CYAN;
-    static const string WHITE;
-    static const string BLACK;
-    static const string RESET;
-
-    //---color functions
-    static string ColorText(const string& Text, const string& Color)
-    {
-        return Color + Text + RESET;
-    }
-
-    static string RedText(const string& Text)
-    {
-        return RED + Text + RESET;
-    }
-
-    static string GreenText(const string& Text)
-    {
-        return GREEN + Text + RESET;
-    }
-
-    static string BlueText(const string& Text)
-    {
-        return BLUE + Text + RESET;
-    }
-
-    static string YellowText(const string& Text)
-    {
-        return YELLOW + Text + RESET;
-    }
-
-    static string MagentaText(const string& Text)
-    {
-        return MAGENTA + Text + RESET;
-    }
-
-    static string CyanText(const string& Text)
-    {
-        return CYAN + Text + RESET;
-    }
-
-    static void PrintColoredText(const string& Text, const string& Color)
-    {
-        cout << Color << Text << RESET;
-    }
-
-    static void PrintColoredTextLine(const string& Text, const string& Color)
-    {
-        cout << Color << Text << RESET << endl;
-    }
-    //---End of color functions---
+   
 
     static void  Srand()
     {
@@ -351,15 +398,5 @@ public:
 
 
 };
-//colors declaration values should be outside class
-const string clsUtil::RED = "\033[31m";
-const string clsUtil::GREEN = "\033[32m";
-const string clsUtil::YELLOW = "\033[33m";
-const string clsUtil::BLUE = "\033[34m";
-const string clsUtil::MAGENTA = "\033[35m";
-const string clsUtil::CYAN = "\033[36m";
-const string clsUtil::WHITE = "\033[37m";
-const string clsUtil::BLACK = "\033[30m";
-const string clsUtil::RESET = "\033[0m";
-//--------------------------------------
+
 

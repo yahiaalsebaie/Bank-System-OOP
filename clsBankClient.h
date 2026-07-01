@@ -223,7 +223,7 @@ public:
 	{
 		while (!clsBankClient::IsClientExist(AccountNumber))
 		{
-			if (ErrorMessage != "") cout << clsUtil::RedText(ErrorMessage);
+			if (ErrorMessage != "") cout << clsUtil::ColorText(ErrorMessage, clsUtil::enColor::ORANGE);
 			AccountNumber = clsInputValidate::ReadString();
 		}
 	}
