@@ -130,8 +130,10 @@
     <ClInclude Include="clsDate.h" />
     <ClInclude Include="clsGlobalTypes.h" />
     <ClInclude Include="clsInputValidate.h" />
+    <ClInclude Include="clsMainScreen.h" />
     <ClInclude Include="clsPeriod.h" />
     <ClInclude Include="clsPerson.h" />
+    <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsString.h" />
     <ClInclude Include="clsUtil.h" />
   </ItemGroup>
