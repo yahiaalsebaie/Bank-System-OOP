@@ -6,6 +6,7 @@
 #include "clsPerson.h"
 #include "clsUtil.h"
 #include <iomanip>
+#include "clsMainScreen.h"
 
 using namespace std;
 
@@ -221,8 +222,9 @@ int main()
     //AddNewClient();
     //DeleteClient();
     //ShowClientsList();
-    ShowTotalBalances();
+    //ShowTotalBalances();
 
+    clsMainScreen::ShowMainMenu();
      system("pause>0");
     return 0;
 }
