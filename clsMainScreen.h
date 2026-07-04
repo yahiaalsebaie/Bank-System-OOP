@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
 #include "clsScreen.h"
+#include "clsUtil.h"
 #include "clsInputValidate.h"
 #include <iomanip>
 #include <cstdlib>
+#include <ios>
 
 
 using namespace std;
@@ -83,7 +85,7 @@ private:
 
     }
 
-    static void _PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
+    static void _PerformMainMenuOption(enMainMenuOptions MainMenuOption)
     {
         switch (MainMenuOption)
         {
@@ -162,7 +164,7 @@ public:
         cout << setw(37) << left << "" << "\t[8] Logout.\n";
         cout << setw(37) << left << "" << SeparatorLine;
 
-        _PerfromMainMenuOption((enMainMenuOptions)_ReadMainMenuOption());
+        _PerformMainMenuOption((enMainMenuOptions)_ReadMainMenuOption());
     }
 
 };

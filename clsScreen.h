@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "clsUtil.h"
+#include "clsDate.h"
 
 class clsScreen
 {
@@ -18,8 +19,9 @@ protected:
             std::cout << "\n\t\t\t\t\t  " << clsUtil::ColorText(SubTitle, clsUtil::enColor::BRIGHT_CYAN);
         }
 
-        std::cout << "\n\t\t\t\t\t______________________________________\n\n";
+        std::cout << "\n\t\t\t\t\t______________________________________";
        // std::cout << clsUtil::ColorText("\n\t\t\t\t\t______________________________________\n\n", clsUtil::enColor::BRIGHT_WHITE);
+        std::cout << "\n\t\t\t\t\t\t\t\t[" << clsUtil::ColorText(clsDate::GetSystemDateToString(), clsUtil::enColor::BRIGHT_GREEN) << "]\n\n";
     }
 
 };

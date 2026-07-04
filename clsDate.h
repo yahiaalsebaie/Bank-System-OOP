@@ -90,9 +90,23 @@ public:
 	{
 		cout << DateToString() << endl;
 	}
-	static string GetSystemDateToString()
+	static string GetSystemDateToString(bool includeDayName = true, bool isShortName = true)
 	{
 		clsDate Date;
+		
+		short currentDay = DayOfWeekOrder(Date.Day, Date.Month, Date.Year);
+		
+		string shortName = DayShortName(currentDay);
+		string longName = DayShortName(currentDay);
+		
+		if(includeDayName)
+		{
+			if(isShortName)
+			return shortName + " " + to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+			else
+			return longName + " " + to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+		}
+
 		 return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 	}
 
@@ -322,7 +336,7 @@ public:
 		int NumberOfDays;
 
 		// Index of the day from 0 to 6
-		int current = DayOfWeekOrder(1, Month, Year);
+		short current = DayOfWeekOrder(1, Month, Year);
 
 		NumberOfDays = NumberOfDaysInAMonth(Month, Year);
 
