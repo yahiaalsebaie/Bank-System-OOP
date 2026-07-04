@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ios>
+#include <string>
 
 
 using namespace std;
@@ -15,10 +16,10 @@ class clsMainScreen :protected clsScreen
 
 
 private:
-    enum enMainMenuOptions {
+    enum class enMainMenuOptions : unsigned char {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenu = 6,
-        eManageUsers = 7, eExit = 8
+        eManageUsers = 7, eLogout = 8
     };
 
     static short _ReadMainMenuOption()
@@ -33,7 +34,6 @@ private:
         cout << setw(37) << left  << "" << clsUtil::ColorText("\n\tPress any key to go back to Main Menu...\n",clsUtil::enColor::BRIGHT_RED);
 
         system("pause>0");
-        ShowMainMenu();
     }
 
     static void _ShowAllClientsScreen()
@@ -123,16 +123,19 @@ private:
         case enMainMenuOptions::eShowTransactionsMenu:
             system("cls");
             _ShowTransactionsMenu();
+            _GoBackToMainMenu();
             break;
 
         case enMainMenuOptions::eManageUsers:
             system("cls");
             _ShowManageUsersMenu();
+            _GoBackToMainMenu();
             break;
 
-        case enMainMenuOptions::eExit:
+        case enMainMenuOptions::eLogout:
             system("cls");
             _ShowEndScreen();
+            _GoBackToMainMenu();
             //Login();
 
             break;
@@ -147,24 +150,29 @@ public:
 
     static void ShowMainMenu()
     {
+        enMainMenuOptions Choice;
 
-        system("cls");
-        _DrawScreenHeader("\t\tMain Screen");
-        string SeparatorLine = clsUtil::ColorText("===========================================\n", clsUtil::enColor::BRIGHT_CYAN);
-        cout << setw(37) << left << "" << SeparatorLine;
-        cout << setw(37) << left << "" << "\t\t\tMain Menu\n";
-        cout << setw(37) << left << "" << SeparatorLine;
-        cout << setw(37) << left << "" << "\t[1] Show Client List.\n";
-        cout << setw(37) << left << "" << "\t[2] Add New Client.\n";
-        cout << setw(37) << left << "" << "\t[3] Delete Client.\n";
-        cout << setw(37) << left << "" << "\t[4] Update Client Info.\n";
-        cout << setw(37) << left << "" << "\t[5] Find Client.\n";
-        cout << setw(37) << left << "" << "\t[6] Transactions.\n";
-        cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
-        cout << setw(37) << left << "" << "\t[8] Logout.\n";
-        cout << setw(37) << left << "" << SeparatorLine;
+        do {
+            system("cls");
+            _DrawScreenHeader("\t\tMain Screen");
+            string SeparatorLine = clsUtil::ColorText("===========================================\n", clsUtil::enColor::BRIGHT_CYAN);
+            cout << setw(37) << left << "" << SeparatorLine;
+            cout << setw(37) << left << "" << "\t\t\tMain Menu\n";
+            cout << setw(37) << left << "" << SeparatorLine;
+            cout << setw(37) << left << "" << "\t[1] Show Client List.\n";
+            cout << setw(37) << left << "" << "\t[2] Add New Client.\n";
+            cout << setw(37) << left << "" << "\t[3] Delete Client.\n";
+            cout << setw(37) << left << "" << "\t[4] Update Client Info.\n";
+            cout << setw(37) << left << "" << "\t[5] Find Client.\n";
+            cout << setw(37) << left << "" << "\t[6] Transactions.\n";
+            cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
+            cout << setw(37) << left << "" << "\t[8] Logout.\n";
+            cout << setw(37) << left << "" << SeparatorLine;
+            Choice = (enMainMenuOptions)_ReadMainMenuOption();
 
-        _PerformMainMenuOption((enMainMenuOptions)_ReadMainMenuOption());
+            _PerformMainMenuOption(Choice);
+        }
+         while (Choice != enMainMenuOptions::eLogout);
     }
 
 };
