@@ -220,7 +220,7 @@ public:
 		return (!c.IsEmpty());
 	}
 
-	static void PerformIsClientAccountNumberExist(string AccountNumber, string ErrorMessage = "\nAccount number is not found, choose another one: ")
+	static void PerformIsClientAccountNumberExist(string& AccountNumber, string ErrorMessage = "\nAccount number is not found, choose another one: ")
 	{
 		while (!clsBankClient::IsClientExist(AccountNumber))
 		{
