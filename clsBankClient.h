@@ -148,7 +148,8 @@ public:
 	float GetAccountBalance() const { return _AccountBalance; }
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-	void Print()
+
+	/*void Print() //No UI Related code inside object.
 	{
 		cout << "\nClient Card:";
 		cout << "\n___________________";
@@ -162,7 +163,7 @@ public:
 		cout << "\nBalance     : " << _AccountBalance;
 		cout << "\n___________________\n";
 
-	}
+	}*/
 
 
 	static clsBankClient Find(const string& AccountNumber)
@@ -244,7 +245,12 @@ public:
 		{
 			if (clsBankClient::IsClientExist(_AccountNumber))
 				return enSaveResults::svFailedAccountNumberExists;
-			else _AddNew();
+			else 
+			{
+				_AddNew();
+				return enSaveResults::svSucceeded;
+			}
+
 		}
 
 		}

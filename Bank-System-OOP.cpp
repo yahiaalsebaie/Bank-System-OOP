@@ -10,30 +10,30 @@
 
 using namespace std;
 
-void ReadClientInfo(clsBankClient& Client)
-{
-    //Different ways to get input.
-
-    cout << "\nEnter FirstName: "; 
-    clsPerson::PerformFirstName(Client); //Upcasting -> Zero Performance Overhead // PerformFirstName() here without any numbers or spatial characters.
-
-    Client.LastName = clsInputValidate::ReadString("\nEnter LastName: "); // Normal input.
-
-    cout << "\nEnter Email: ";
-    clsPerson::PerformEmail(Client);
-
-    cout << "\nEnter Phone: ";
-    Client.PerformPhone(Client);
-
-    cout << "Enter PinCode: ";
-    Client.PinCode = clsInputValidate::ReadString();
-
-    cout << "\nEnter Account Balance: ";
-    Client.AccountBalance = clsInputValidate::ReadFloatNumber();
-
-    //cout << "Enter Gender [M/F]: "; //I didn't implement it and MartialStatus in output to keep it as simple as can.
-    //Client.PerformGenderInfo(Client);
-}
+//void ReadClientInfo(clsBankClient& Client)
+//{
+//    //Different ways to get input.
+//
+//    cout << "\nEnter FirstName: "; 
+//    clsPerson::PerformFirstName(Client); //Upcasting -> Zero Performance Overhead // PerformFirstName() here without any numbers or spatial characters.
+//
+//    Client.LastName = clsInputValidate::ReadString("\nEnter LastName: "); // Normal input.
+//
+//    cout << "\nEnter Email: ";
+//    clsPerson::PerformEmail(Client);
+//
+//    cout << "\nEnter Phone: ";
+//    Client.PerformPhone(Client);
+//
+//    cout << "Enter PinCode: ";
+//    Client.PinCode = clsInputValidate::ReadString();
+//
+//    cout << "\nEnter Account Balance: ";
+//    Client.AccountBalance = clsInputValidate::ReadFloatNumber();
+//
+//    //cout << "Enter Gender [M/F]: "; //I didn't implement it and MartialStatus in output to keep it as simple as can.
+//    //Client.PerformGenderInfo(Client);
+//}
 
 void UpdateClient()
 {
@@ -51,7 +51,7 @@ void UpdateClient()
     
     cout << "\n\nUpdate Client Info:";
     cout << clsUtil::ColorText("\n____________________\n",clsUtil::enColor::GREEN);
-    ReadClientInfo(Client1);
+    //ReadClientInfo(Client1);
 
     clsBankClient::enSaveResults SaveResult;
 
@@ -75,29 +75,29 @@ void UpdateClient()
     }
 }
 
-void AddNewClient()
-{
-    string AccountNumber = "";
-
-    cout << "\nPlease Enter client Account Number: ";
-    AccountNumber = clsInputValidate::ReadString();
-
-    while (clsBankClient::IsClientExist(AccountNumber))
-    {
-        cout << clsUtil::ColorText("\nAccount Number Is Already Used, Choose another one: ", clsUtil::enColor::ORANGE);
-        AccountNumber = clsInputValidate::ReadString();
-    }
-
-    clsBankClient newClient = clsBankClient::GetAddNewClientObject(AccountNumber);
-
-    ReadClientInfo(newClient);
-
-    clsBankClient::enSaveResults saveResult;
-
-    saveResult = newClient.Save();
-
-
-}
+//void AddNewClient()
+//{
+//    string AccountNumber = "";
+//
+//    cout << "\nPlease Enter client Account Number: ";
+//    AccountNumber = clsInputValidate::ReadString();
+//
+//    while (clsBankClient::IsClientExist(AccountNumber))
+//    {
+//        cout << clsUtil::ColorText("\nAccount Number Is Already Used, Choose another one: ", clsUtil::enColor::ORANGE);
+//        AccountNumber = clsInputValidate::ReadString();
+//    }
+//
+//    clsBankClient newClient = clsBankClient::GetAddNewClientObject(AccountNumber);
+//
+//    ReadClientInfo(newClient);
+//
+//    clsBankClient::enSaveResults saveResult;
+//
+//    saveResult = newClient.Save();
+//
+//
+//}
 
 void DeleteClient()
 {
