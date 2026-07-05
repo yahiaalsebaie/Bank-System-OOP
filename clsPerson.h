@@ -87,7 +87,7 @@ public:
         return _FirstName + " " + _LastName;
     }
 
-    void Print()
+    /*void Print() //make it in UI only
     {
         cout << "\nInfo:";
         cout << "\n___________________";
@@ -98,7 +98,7 @@ public:
         cout << "\nPhone    : " << _Phone;
         cout << "\n___________________\n";
 
-    }
+    }*/
 
     static void PerformFullNameInfo(clsPerson& Person, string ErrorMessage = "Invalid Name, Please Enter a Valid Name [without any spatial characters] : ")
     {

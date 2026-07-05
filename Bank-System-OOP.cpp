@@ -35,45 +35,45 @@ using namespace std;
 //    //Client.PerformGenderInfo(Client);
 //}
 
-void UpdateClient()
-{
-    string AccountNumber = "";
-
-    cout << "\nPlease Enter client Account Number: ";
-    AccountNumber = clsInputValidate::ReadString();
-
-    clsBankClient::PerformIsClientAccountNumberExist(AccountNumber);
-
-    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
-    Client1.Print();
-
-    
-    
-    cout << "\n\nUpdate Client Info:";
-    cout << clsUtil::ColorText("\n____________________\n",clsUtil::enColor::GREEN);
-    //ReadClientInfo(Client1);
-
-    clsBankClient::enSaveResults SaveResult;
-
-    SaveResult = Client1.Save();
-
-    switch (SaveResult)
-    {
-    case  clsBankClient::enSaveResults::svSucceeded:
-    {
-        cout << "\nAccount Updated Successfully :-)\n";
-        Client1.Print();
-        break;
-    }
-    case clsBankClient::enSaveResults::svFaildEmptyObject:
-    {
-        cout << clsUtil::ColorText("\nError account was not saved because it's Empty", clsUtil::enColor::RED);
-        break;
-
-    }
-
-    }
-}
+//void UpdateClient()
+//{
+//    string AccountNumber = "";
+//
+//    cout << "\nPlease Enter client Account Number: ";
+//    AccountNumber = clsInputValidate::ReadString();
+//
+//    clsBankClient::PerformIsClientAccountNumberExist(AccountNumber);
+//
+//    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+//    Client1.Print();
+//
+//    
+//    
+//    cout << "\n\nUpdate Client Info:";
+//    cout << clsUtil::ColorText("\n____________________\n",clsUtil::enColor::GREEN);
+//    //ReadClientInfo(Client1);
+//
+//    clsBankClient::enSaveResults SaveResult;
+//
+//    SaveResult = Client1.Save();
+//
+//    switch (SaveResult)
+//    {
+//    case  clsBankClient::enSaveResults::svSucceeded:
+//    {
+//        cout << "\nAccount Updated Successfully :-)\n";
+//        Client1.Print();
+//        break;
+//    }
+//    case clsBankClient::enSaveResults::svFaildEmptyObject:
+//    {
+//        cout << clsUtil::ColorText("\nError account was not saved because it's Empty", clsUtil::enColor::RED);
+//        break;
+//
+//    }
+//
+//    }
+//}
 
 //void AddNewClient()
 //{
@@ -99,34 +99,34 @@ void UpdateClient()
 //
 //}
 
-void DeleteClient()
-{
-    string AccountNumber = "";
-
-    cout << "\nPlease Enter client Account Number: ";
-    AccountNumber = clsInputValidate::ReadString();
-    
-    clsBankClient::PerformIsClientAccountNumberExist(AccountNumber);
-
-    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
-    Client1.Print();
-
-    char Answer = 'n';
-    cout << clsUtil::ColorText("\nAre you sure you want to Delete this Client ? [Y/N] >> ", clsUtil::enColor::RED);
-    cin >> Answer;
-
-    if (Answer == 'Y' || Answer == 'y')
-    {
-        if (Client1.Delete())
-        {
-            cout << clsUtil::ColorText("\nClient Deleted Successfully.\n", clsUtil::enColor::BRIGHT_GREEN);
-            Client1.Print();
-        }
-
-        else  cout << clsUtil::ColorText("\nError: Client Not Deleted.\n", clsUtil::enColor::RED);
-    }
-
-}
+//void DeleteClient()
+//{
+//    string AccountNumber = "";
+//
+//    cout << "\nPlease Enter client Account Number: ";
+//    AccountNumber = clsInputValidate::ReadString();
+//    
+//    clsBankClient::PerformIsClientAccountNumberExist(AccountNumber);
+//
+//    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+//    Client1.Print();
+//
+//    char Answer = 'n';
+//    cout << clsUtil::ColorText("\nAre you sure you want to Delete this Client ? [Y/N] >> ", clsUtil::enColor::RED);
+//    cin >> Answer;
+//
+//    if (Answer == 'Y' || Answer == 'y')
+//    {
+//        if (Client1.Delete())
+//        {
+//            cout << clsUtil::ColorText("\nClient Deleted Successfully.\n", clsUtil::enColor::BRIGHT_GREEN);
+//            Client1.Print();
+//        }
+//
+//        else  cout << clsUtil::ColorText("\nError: Client Not Deleted.\n", clsUtil::enColor::RED);
+//    }
+//
+//}
 
 //--TotalBalances--
 void PrintClientRecordBalanceLine(const clsBankClient& Client)
