@@ -3,10 +3,12 @@
 #include "clsScreen.h"
 #include "clsUtil.h"
 #include "clsInputValidate.h"
+#include "clsClientListScreen.h"
 #include <iomanip>
 #include <cstdlib>
 #include <ios>
 #include <string>
+#include <limits>
 
 
 using namespace std;
@@ -26,6 +28,7 @@ private:
     {
         cout << setw(37) << left << "";
         short Choice = clsInputValidate::ReadNumberInRange(1, 8, "Choose what do you want to do?");
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return Choice;
     }
 
@@ -38,8 +41,8 @@ private:
 
     static void _ShowAllClientsScreen()
     {
-        cout << "\nClient List Screen Will be here...\n";
-
+       // cout << "\nClient List Screen Will be here...\n";
+        clsClientListScreen::ShowClientsList();
 
     }
 
@@ -135,7 +138,7 @@ private:
         case enMainMenuOptions::eLogout:
             system("cls");
             _ShowEndScreen();
-            _GoBackToMainMenu();
+
             //Login();
 
             break;
@@ -156,6 +159,7 @@ public:
             system("cls");
             _DrawScreenHeader("\t\tMain Screen");
             string SeparatorLine = clsUtil::ColorText("===========================================\n", clsUtil::enColor::BRIGHT_CYAN);
+
             cout << setw(37) << left << "" << SeparatorLine;
             cout << setw(37) << left << "" << "\t\t\tMain Menu\n";
             cout << setw(37) << left << "" << SeparatorLine;
@@ -168,11 +172,16 @@ public:
             cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
             cout << setw(37) << left << "" << "\t[8] Logout.\n";
             cout << setw(37) << left << "" << SeparatorLine;
+            
             Choice = (enMainMenuOptions)_ReadMainMenuOption();
 
-            _PerformMainMenuOption(Choice);
+            if (Choice != enMainMenuOptions::eLogout)
+                _PerformMainMenuOption(Choice);
         }
-         while (Choice != enMainMenuOptions::eLogout);
+        while (Choice != enMainMenuOptions::eLogout);
+
+        system("cls");
+        _ShowEndScreen();
     }
 
 };
