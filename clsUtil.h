@@ -63,9 +63,11 @@ private:
         case enColor::BRIGHT_MAGENTA: return "\033[95m";
         case enColor::BRIGHT_CYAN:    return "\033[96m";
         case enColor::BRIGHT_WHITE:   return "\033[97m";
-
+            
+            //ANSI 256 Color Palette.
             // warm shades
-        case enColor::ORANGE:         return "\033[38;5;208m";
+            //38->Foreground , 5-> 256-color mode , then color number 208 = orange.
+        case enColor::ORANGE:         return "\033[38;5;208m"; 
         case enColor::DARK_ORANGE:    return "\033[38;5;166m";
         case enColor::LIGHT_ORANGE:   return "\033[38;5;215m";
         case enColor::PINK:           return "\033[38;5;211m";
@@ -105,7 +107,8 @@ private:
     }
 
     // Helper: Convert HEX to RGB
-    static void _HexToRGB(const string& Hex, unsigned char& R, unsigned char& G, unsigned char& B) {
+    static void _HexToRGB(const string& Hex, unsigned char& R, unsigned char& G, unsigned char& B) 
+    {
         string cleanHex = Hex;
         if (cleanHex[0] == '#') cleanHex = cleanHex.substr(1);
         
@@ -119,24 +122,26 @@ private:
         B = (unsigned char)stoi(cleanHex.substr(4, 2), nullptr, 16);
     }
 
-    // Helper: Convert HSL to RGB
-    static void _HSLToRGB(float H, float S, float L, unsigned char& R, unsigned char& G, unsigned char& B) {
+    // Helper: Convert HSL to RGB // HSL -> Hue Saturation Lightness
+    static void _HSLToRGB(float H, float S, float L, unsigned char& R, unsigned char& G, unsigned char& B) 
+    { //computer only understand RGB
         // Normalize H to 0-360, S and L to 0-1
-        H = fmod(H, 360.0f);
-        if (H < 0) H += 360.0f;
+        // HSL color(H: 0 - 360, S : 0 - 100, L : 0 - 100)
+        H = fmod(H, 360.0f); //Floating-point Modulus, floating mod% Cuz mod% only in int
+        if (H < 0) H += 360.0f; // if (H == -30) then (H += 360) will be 330.
         S /= 100.0f;
         L /= 100.0f;
 
-        float C = (1.0f - fabs(2.0f * L - 1.0f)) * S;
-        float X = C * (1.0f - fabs(fmod(H / 60.0f, 2.0f) - 1.0f));
-        float m = L - C / 2.0f;
+        float C = (1.0f - fabs(2.0f * L - 1.0f)) * S; //Chroma: The higher the color intensity, the more intense the color.
+        float X = C * (1.0f - fabs(fmod(H / 60.0f, 2.0f) - 1.0f)); //An intermediate value between two colors.
+        float m = L - C / 2.0f;//Adding final brightness.
 
         float r, g, b;
 
         if (H >= 0 && H < 60) {
-            r = C; g = X; b = 0;
+            r = C; g = X; b = 0; //Between Red and Yellow
         } else if (H >= 60 && H < 120) {
-            r = X; g = C; b = 0;
+            r = X; g = C; b = 0; //Between Green and Cyan
         } else if (H >= 120 && H < 180) {
             r = 0; g = C; b = X;
         } else if (H >= 180 && H < 240) {
@@ -146,26 +151,29 @@ private:
         } else {
             r = C; g = 0; b = X;
         }
-
+        // RGB -> 0-255
         R = (unsigned char)round((r + m) * 255.0f);
         G = (unsigned char)round((g + m) * 255.0f);
         B = (unsigned char)round((b + m) * 255.0f);
     }
 
     // Helper: Create ANSI escape code from RGB
-    static string _GetRGBEscapeCode(unsigned char R, unsigned char G, unsigned char B) {
+    static string _GetRGBEscapeCode(unsigned char R, unsigned char G, unsigned char B) 
+    {
         return "\033[38;2;" + std::to_string(R) + ";" + std::to_string(G) + ";" + std::to_string(B) + "m";
     }
 
 public:
 
     // Original ColorText with enum
-    static string ColorText(const string& Text, enColor Color) {
+    static string ColorText(const string& Text, enColor Color)
+    {
         return _GetColorEscapeCode(Color) + Text + _GetColorEscapeCode(enColor::RESET);
     }
 
     // ColorText with RGB values
-    static string ColorText(const string& Text, unsigned char R, unsigned char G, unsigned char B) {
+    static string ColorText(const string& Text, unsigned char R, unsigned char G, unsigned char B) 
+    {
         return _GetRGBEscapeCode(R, G, B) + Text + _GetColorEscapeCode(enColor::RESET);
     }
 
