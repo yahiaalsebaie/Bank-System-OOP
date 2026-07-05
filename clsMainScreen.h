@@ -21,13 +21,13 @@ private:
     enum class enMainMenuOptions : unsigned char {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenu = 6,
-        eManageUsers = 7, eLogout = 8
+        eManageUsers = 7, eLogout = 0
     };
 
     static short _ReadMainMenuOption()
     {
         cout << setw(37) << left << "";
-        short Choice = clsInputValidate::ReadNumberInRange(1, 8, "Choose what do you want to do?");
+        short Choice = clsInputValidate::ReadNumberInRange(0, 7, "Choose what do you want to do?");
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return Choice;
     }
@@ -170,7 +170,7 @@ public:
             cout << setw(37) << left << "" << "\t[5] Find Client.\n";
             cout << setw(37) << left << "" << "\t[6] Transactions.\n";
             cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
-            cout << setw(37) << left << "" << "\t[8] Logout.\n";
+            cout << setw(37) << left << "" << "\t[0] Logout.\n";
             cout << setw(37) << left << "" << SeparatorLine;
             
             Choice = (enMainMenuOptions)_ReadMainMenuOption();

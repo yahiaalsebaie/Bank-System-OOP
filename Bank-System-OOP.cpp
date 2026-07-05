@@ -12,7 +12,7 @@ using namespace std;
 
 void ReadClientInfo(clsBankClient& Client)
 {
-    //Diffrent ways to get input.
+    //Different ways to get input.
 
     cout << "\nEnter FirstName: "; 
     clsPerson::PerformFirstName(Client); //Upcasting -> Zero Performance Overhead // PerformFirstName() here without any numbers or spatial characters.
@@ -185,6 +185,7 @@ int main()
     //ShowTotalBalances();
 
     clsMainScreen::ShowMainMenu();
+
      system("pause>0");
     return 0;
 }
