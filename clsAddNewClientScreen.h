@@ -9,7 +9,7 @@
 
 class clsAddNewClientScreen : protected clsScreen
 {
-private:
+protected:
 	static void _ReadClientInfo(clsBankClient& Client)
 	{
 		//Different ways to get input.
