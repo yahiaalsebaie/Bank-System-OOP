@@ -90,7 +90,7 @@ public:
 		}
 		case clsBankClient::enSaveResults::svFaildEmptyObject:
 		{
-			cout << clsUtil::ColorText("\nError account was not saved because it's Empty", clsUtil::enColor::RED);
+			cout << clsUtil::ColorText("\nError account was Not saved", clsUtil::enColor::RED);
 			break;
 
 		}
