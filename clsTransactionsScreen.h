@@ -3,6 +3,7 @@
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsShowWithdrawScreen.h"
+#include "clsTotalBalancesScreen.h"
 #include "clsUtil.h"
 #include <cstdlib>
 #include <iomanip>
@@ -35,20 +36,22 @@ private:
 	}
 	static void _ShowDepositScreen()
 	{
-		cout << "\n Deposit Screen  Will be here...\n";
+		//cout << "\n Deposit Screen  Will be here...\n";
+		clsDepositScreen::ShowDepositScreen();
 
 	}
 
 	static void _ShowWithdrawScreen()
 	{
-		cout << "\n Withdraw Will be here...\n";
+		//cout << "\n Withdraw Will be here...\n";
+		clsShowWithdrawScreen::ShowWithdrawScreen();
 
 	}
 
 	static void _ShowTotalBalancesScreen()
 	{
-		cout << "\n TotalBalances Screen Will be here...\n";
-
+		//cout << "\n TotalBalances Screen Will be here...\n";
+		clsTotalBalancesScreen::ShowTotalBalancesScreen();
 	}
 
 
@@ -59,17 +62,17 @@ private:
 		{
 		case clsTransactionsScreen::enTransactionsMenuOptions::Deposit:
 			system("cls");
-			clsDepositScreen::ShowDepositScreen();
+			_ShowDepositScreen();
 			_GoBackToTransactionsMenu();
 			break;
 		case clsTransactionsScreen::enTransactionsMenuOptions::Withdraw:
 			system("cls");
-			clsShowWithdrawScreen::ShowWithdrawScreen();
+			_ShowWithdrawScreen();
 			_GoBackToTransactionsMenu();
 			break;
 		case clsTransactionsScreen::enTransactionsMenuOptions::TotalBalances:
 			system("cls");
-
+			_ShowTotalBalancesScreen();
 			_GoBackToTransactionsMenu();
 			break;
 		case clsTransactionsScreen::enTransactionsMenuOptions::MainMenu:
