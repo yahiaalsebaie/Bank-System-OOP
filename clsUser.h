@@ -46,7 +46,7 @@ private:
 	{
 		vector<string> vUserData = clsString::Split(Line, Separator);
 
-		return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2], vUserData[3], vUserData[4], vUserData[5], stof(vUserData[6]));
+		return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2], vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
 	}
 
 	static vector<clsUser> _LoadUsersDataFromFile(string FileName = "Users.txt")
