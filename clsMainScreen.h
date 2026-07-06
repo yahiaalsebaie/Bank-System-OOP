@@ -7,6 +7,7 @@
 #include "clsScreen.h"
 #include "clsTransactionsScreen.h"
 #include "clsUpdateClientScreen.h"
+#include "clsTotalBalancesScreen.h"
 #include "clsUtil.h"
 #include <cstdlib>
 #include <iomanip>
@@ -84,7 +85,7 @@ private:
 	static void _ShowManageUsersMenu()
 	{
 		cout << "\nUsers Menu Will be here...\n";
-
+		clsTotalBalancesScreen::ShowTotalBalancesScreen();
 	}
 
 	static void _ShowEndScreen()
