@@ -1,18 +1,18 @@
 ﻿#pragma once
-#include <iostream>
-#include <string>
+#include "clsInputValidate.h"
 #include "clsPerson.h"
 #include "clsString.h"
-#include <vector>
-#include <fstream>
-#include "clsInputValidate.h"
 #include "clsUtil.h"
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 class clsBankClient : public clsPerson
 {
 private:
-	enum enMode { EmptyMode = 0, UpdateMode = 1 , AddNewMode = 2};
+	enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
 	enMode _Mode;
 
 	string _AccountNumber;
@@ -105,8 +105,8 @@ private:
 	void _Update()
 	{
 		vector <clsBankClient> _vClients = _LoadClientsDataFromFile("Clients.txt");
-		
-		for (clsBankClient & c : _vClients)
+
+		for (clsBankClient& c : _vClients)
 		{
 			if (c.AccountNumber() == AccountNumber())
 			{
@@ -245,7 +245,7 @@ public:
 		{
 			if (clsBankClient::IsClientExist(_AccountNumber))
 				return enSaveResults::svFailedAccountNumberExists;
-			else 
+			else
 			{
 				_AddNew();
 				return enSaveResults::svSucceeded;
@@ -294,5 +294,16 @@ public:
 		}
 		return totalBalances;
 
+	}
+
+	void Deposit(double Amount)
+	{
+		_AccountBalance += Amount;
+		Save();
+	}
+	void Withdraw(double Amount)
+	{
+		_AccountBalance -= Amount;
+		Save();
 	}
 };
