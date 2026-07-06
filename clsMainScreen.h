@@ -8,6 +8,7 @@
 #include "clsDeleteClientScreen.h"
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
+#include "clsTransactionsScreen.h"
 #include <iomanip>
 #include <cstdlib>
 #include <ios>
@@ -76,8 +77,8 @@ private:
 
     static void _ShowTransactionsMenu()
     {
-        cout << "\nTransactions Menu Will be here...\n";
-
+       // cout << "\nTransactions Menu Will be here...\n";
+        clsTransactionsScreen::ShowTransactionsMenu();
     }
 
     static void _ShowManageUsersMenu()
