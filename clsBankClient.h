@@ -234,7 +234,8 @@ public:
 		switch (_Mode)
 		{
 		case clsBankClient::EmptyMode:
-			return enSaveResults::svFaildEmptyObject;
+			if (IsEmpty())
+				return enSaveResults::svFaildEmptyObject;
 
 		case clsBankClient::UpdateMode:
 		{
@@ -248,6 +249,7 @@ public:
 			else
 			{
 				_AddNew();
+				_Mode = enMode::UpdateMode;
 				return enSaveResults::svSucceeded;
 			}
 
