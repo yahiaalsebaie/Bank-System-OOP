@@ -304,7 +304,7 @@ public:
 	bool Withdraw(double Amount)
 	{
 		if (Amount > _AccountBalance) return false;
-		else 
+		else
 		{
 			_AccountBalance -= Amount;
 			Save();

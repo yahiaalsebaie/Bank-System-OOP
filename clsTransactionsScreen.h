@@ -2,6 +2,7 @@
 #include "clsDepositScreen.h"
 #include "clsInputValidate.h"
 #include "clsScreen.h"
+#include "clsShowWithdrawScreen.h"
 #include "clsUtil.h"
 #include <cstdlib>
 #include <iomanip>
@@ -63,7 +64,7 @@ private:
 			break;
 		case clsTransactionsScreen::enTransactionsMenuOptions::Withdraw:
 			system("cls");
-
+			clsShowWithdrawScreen::ShowWithdrawScreen();
 			_GoBackToTransactionsMenu();
 			break;
 		case clsTransactionsScreen::enTransactionsMenuOptions::TotalBalances:
@@ -93,8 +94,8 @@ public:
 			cout << setw(37) << left << "" << SeparatorLine;
 			cout << setw(37) << left << "" << "\t\t  Transactions Menu\n";
 			cout << setw(37) << left << "" << SeparatorLine;
-			cout << setw(37) << left << "" << "\t[1] Deposit.\n";
-			cout << setw(37) << left << "" << "\t[2] Withdraw.\n";
+			cout << setw(37) << left << "" << "\t[1] Deposit+++.\n";
+			cout << setw(37) << left << "" << "\t[2] Withdraw--.\n";
 			cout << setw(37) << left << "" << "\t[3] Total Balances.\n";
 			cout << setw(37) << left << "" << "\t[0] Main Menu.\n";
 			cout << setw(37) << left << "" << SeparatorLine;

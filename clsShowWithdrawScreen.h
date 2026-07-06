@@ -7,8 +7,7 @@
 #include <string>
 
 using namespace std;
-
-class clsDepositScreen :protected clsScreen
+class clsShowWithdrawScreen :protected clsScreen
 {
 private:
 
@@ -30,12 +29,12 @@ private:
 	}
 
 
-
 public:
-	static void ShowDepositScreen()
+
+	static void ShowWithdrawScreen()
 	{
 
-		_DrawScreenHeader("\t  Deposit Screen ");
+		_DrawScreenHeader("\t  Withdraw Screen ");
 		string AccountNumber = "";
 
 		std::cout << "\nPlease Enter client Account Number: ";
@@ -47,7 +46,7 @@ public:
 		_PrintClient(Client1);
 
 
-		double Amount = clsInputValidate::ReadPositiveDblNumber("\n\nPlease Enter Deposit Amount : ");
+		double Amount = clsInputValidate::ReadPositiveDblNumber("\n\nPlease Enter Withdraw Amount : ");
 
 		char Answer = 'N';
 		std::cout << clsUtil::ColorText("\nAre you sure you want to perform this transaction ? [Y/N] >> ", clsUtil::enColor::ORANGE);
@@ -55,9 +54,16 @@ public:
 
 		if (Answer == 'Y' || Answer == 'y' || Answer == '1')
 		{
-			Client1.Deposit(Amount);
+			if (Client1.Withdraw(Amount))
+				std::cout << clsUtil::ColorText(("Amount Withdraw Successfully Done, New Balance is [" + to_string(Client1.AccountBalance) + "]."), clsUtil::enColor::GOLD) << endl;
+			else
+			{
+				cout << "\nCannot withdraw, Insufficient Balance!";
+				cout << "\nAmount to withdraw is: " << clsUtil::ColorText(to_string(Amount), 255, 0, 0); //RGB Red
+				cout << "\nYour Balance is: " << clsUtil::ColorText(to_string(Client1.AccountBalance), 150, 179, 149) << endl;
 
-			std::cout << clsUtil::ColorText(("Amount Deposit Successfully Done, New Balance is [" + to_string(Client1.AccountBalance) + "]."), clsUtil::enColor::GOLD) << endl;
+
+			}
 		}
 		else std::cout << clsUtil::ColorText("\nOperation was Cancelled..\n", clsUtil::enColor::RED) << endl;
 
@@ -65,3 +71,4 @@ public:
 	}
 
 };
+
