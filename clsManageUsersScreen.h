@@ -3,6 +3,7 @@
 #include "clsScreen.h"
 #include "clsUtil.h"
 #include "clsUsersListScreen.h"
+#include "clsAddNewUserScreen.h"
 #include <cstdlib>
 #include <iomanip>
 #include <ios>
@@ -40,8 +41,8 @@ private:
 	};
 	static void _ShowAddNewUserScreen()
 	{
-		cout << "\n AddNewUser Screen  Will be here...\n";
-
+		//cout << "\n AddNewUser Screen  Will be here...\n";
+		clsAddNewUserScreen::ShowAddNewUserScreen();
 	}
 	static void _ShowDeleteUserScreen()
 	{
