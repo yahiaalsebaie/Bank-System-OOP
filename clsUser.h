@@ -134,6 +134,9 @@ public:
 	}
 	enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFailedUserNameExists = 2 };
 
+	enum enPermissions {
+		epShowClientsList = 1, epAddNewClient = 2, epDeleteClient = 4, epUpdateClient = 8, epFindClient = 16, epTransactions = 32, epMangeUsers = 64, epAll = -1
+	};
 
 	bool MarkForDelete() { return _MarkForDelete; }
 
