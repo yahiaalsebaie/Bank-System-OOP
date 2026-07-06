@@ -93,6 +93,24 @@ public:
         } while (Number <= 0);
         return Number;
     }
+    static double ReadPositiveDblNumber(string Message = "")
+    {
+   //     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        double Number = 0;
+        do
+        {
+                    if (Message != "") cout << Message;;
+            cin >> Number;
+            while (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid Number, Enter a valid one: ";
+                cin >> Number;
+            }
+        } while (Number <= 0);
+        return Number;
+    }
 
     // -----------------------------------------------------------------------
     //  Unsigned long long - rejects negative sign
