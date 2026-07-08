@@ -5,11 +5,13 @@
 #include "Clients/clsFindClientScreen.h"
 #include "Clients/clsUpdateClientScreen.h"
 #include "clsInputValidate.h"
+#include "clsUser.h"
 #include "clsUtil.h"
 #include "Screens/clsScreen.h"
 #include "Transactions/clsTransactionsScreen.h"
 #include "Users/clsManageUsersScreen.h"
 #include <cstdlib>
+#include <Global.h>
 #include <iomanip>
 #include <ios>
 #include <iostream>
@@ -88,9 +90,10 @@ private:
 		clsManageUsersScreen::ShowManageUsersMenu();
 	}
 
-	static void _ShowEndScreen()
+	static void _ShowLogoutScreen()
 	{
-		cout << "\nEnd Screen Will be here...\n";
+		//cout << "\nEnd Screen Will be here...\n";
+		CurrentUser = clsUser::Find("", "");
 
 	}
 
@@ -143,9 +146,7 @@ private:
 
 		case enMainMenuOptions::eLogout:
 			system("cls");
-			_ShowEndScreen();
-
-			//Login();
+			_ShowLogoutScreen();
 
 			break;
 		}
@@ -186,7 +187,7 @@ public:
 		} while (Choice != enMainMenuOptions::eLogout);
 
 		system("cls");
-		_ShowEndScreen();
+		_ShowLogoutScreen();
 	}
 
 };
