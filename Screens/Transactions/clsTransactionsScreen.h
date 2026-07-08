@@ -5,6 +5,7 @@
 #include "clsShowWithdrawScreen.h"
 #include "clsTotalBalancesScreen.h"
 #include "clsUtil.h"
+#include <clsUser.h>
 #include <cstdlib>
 #include <iomanip>
 #include <ios>
@@ -92,6 +93,12 @@ public:
 		do {
 			system("cls");
 			_DrawScreenHeader("\t  Transactions Screen");
+
+			if (!CheckAccessRights(clsUser::enPermissions::epTransactions))
+			{
+				return;
+			}
+
 			string SeparatorLine = clsUtil::ColorText("===========================================\n", clsUtil::enColor::BRIGHT_CYAN);
 
 			cout << setw(37) << left << "" << SeparatorLine;

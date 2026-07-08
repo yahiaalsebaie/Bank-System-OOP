@@ -1,12 +1,13 @@
 #pragma once
-#include "clsInputValidate.h"
-#include "clsScreen.h"
-#include "clsUtil.h"
-#include "clsUsersListScreen.h"
 #include "clsAddNewUserScreen.h"
 #include "clsDeleteUserScreen.h"
-#include "clsUpdateUserScreen.h"
 #include "clsFindUserScreen.h"
+#include "clsInputValidate.h"
+#include "clsScreen.h"
+#include "clsUpdateUserScreen.h"
+#include "clsUser.h"
+#include "clsUsersListScreen.h"
+#include "clsUtil.h"
 #include <cstdlib>
 #include <iomanip>
 #include <ios>
@@ -113,6 +114,12 @@ public:
 		do {
 			system("cls");
 			_DrawScreenHeader("\t  Manage Users Screen");
+
+			if (!CheckAccessRights(clsUser::enPermissions::epMangeUsers))
+			{
+				return;
+			}
+
 			string SeparatorLine = clsUtil::ColorText("===========================================\n", clsUtil::enColor::BRIGHT_CYAN);
 
 			cout << setw(37) << left << "" << SeparatorLine;//----------

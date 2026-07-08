@@ -3,6 +3,7 @@
 #include "clsPerson.h"
 #include "clsScreen.h"
 #include "clsUtil.h"
+#include <clsUser.h>
 #include <iomanip>
 #include <ios>
 #include <iostream>
@@ -33,6 +34,11 @@ public:
 
 	static void ShowClientsList()
 	{
+		if (!CheckAccessRights(clsUser::enPermissions::epShowClientsList))
+		{
+			return;
+		}
+
 		const vector<clsBankClient>& vClients = clsBankClient::GetClientsList();
 
 		//Head
@@ -43,6 +49,8 @@ public:
 
 		_DrawScreenHeader(Title, SubTitle);
 
+
+		
 
 		//Body
 		cout << clsUtil::ColorText("| ", clsUtil::enColor::RED) << left << setw(15) << "Account Number";

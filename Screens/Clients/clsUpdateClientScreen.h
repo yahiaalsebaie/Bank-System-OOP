@@ -4,6 +4,7 @@
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsUtil.h"
+#include <clsUser.h>
 #include <iostream>
 #include <string>
 
@@ -60,6 +61,13 @@ public:
 	{
 		_DrawScreenHeader("\t Update Client Screen");
 
+
+		if (!CheckAccessRights(clsUser::enPermissions::epUpdateClient))
+		{
+			return;
+		}
+
+
 		string AccountNumber = "";
 
 		cout << "\nPlease Enter client Account Number: ";
@@ -69,8 +77,6 @@ public:
 
 		clsBankClient Client1 = clsBankClient::Find(AccountNumber);
 		_PrintClient(Client1);
-
-
 
 		cout << "\n\nUpdate Client Info:";
 		cout << clsUtil::ColorText("\n____________________\n", clsUtil::enColor::GREEN);

@@ -4,6 +4,7 @@
 #include "clsPerson.h"
 #include "clsScreen.h"
 #include "clsUtil.h"
+#include <clsUser.h>
 #include <iostream>
 #include <string>
 
@@ -34,6 +35,12 @@ public:
 
 		_DrawScreenHeader("\tFind Client Screen");
 
+
+		if (!CheckAccessRights(clsUser::enPermissions::epFindClient))
+		{
+			return;
+		}
+
 		string AccountNumber;
 		cout << "\nPlease Enter Account Number: ";
 		AccountNumber = clsInputValidate::ReadString();
@@ -53,7 +60,7 @@ public:
 
 		}
 
-	//	_PrintClient(Client1);
+		//	_PrintClient(Client1);
 
 	}
 

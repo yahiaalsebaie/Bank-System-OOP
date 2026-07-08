@@ -4,6 +4,7 @@
 #include "clsPerson.h"
 #include "clsScreen.h"
 #include "clsUtil.h"
+#include <clsUser.h>
 #include <iostream>
 #include <string>
 
@@ -59,6 +60,11 @@ public:
 		string AccountNumber = "";
 
 		_DrawScreenHeader("\t Add New Client Screen");
+
+		if (!CheckAccessRights(clsUser::enPermissions::epAddNewClient))
+		{
+			return;
+		}
 
 		cout << "\nPlease Enter client Account Number: ";
 		AccountNumber = clsInputValidate::ReadString();

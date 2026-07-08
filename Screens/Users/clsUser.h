@@ -149,8 +149,8 @@ public:
 	__declspec(property(get = GetPassword, put = SetPassword)) string Password;
 
 	void SetPermissions(float Permissions) { _Permissions = Permissions; };
-	float GetPermissions() const { return _Permissions; }
-	__declspec(property(get = GetPermissions, put = SetPermissions)) float Permissions;
+	short GetPermissions() const { return _Permissions; }
+	__declspec(property(get = GetPermissions, put = SetPermissions)) short Permissions;
 
 	static clsUser Find(const string& UserName)
 	{
@@ -271,5 +271,11 @@ public:
 		return _LoadUsersDataFromFile();
 	}
 
+	bool CheckAccessPermission(enPermissions Permission)
+	{
+		if (this->Permissions == enPermissions::epAll) return true;
+		if ((this->Permissions & Permission) == Permission) return true;
+		else return false;
+	}
 
 };

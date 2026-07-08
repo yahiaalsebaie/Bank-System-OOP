@@ -3,6 +3,7 @@
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsUtil.h"
+#include <clsUser.h>
 #include <iostream>
 #include <string>
 
@@ -36,6 +37,8 @@ public:
 	{
 
 		_DrawScreenHeader("\t  Deposit Screen ");
+
+
 		string AccountNumber = "";
 
 		std::cout << "\nPlease Enter client Account Number: ";
