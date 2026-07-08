@@ -1,4 +1,4 @@
-﻿#include "Screens/clsMainScreen.h"
+﻿#include "clsLoginScreen.h"
 #include <cstdlib>
 
 using namespace std;
@@ -7,8 +7,8 @@ using namespace std;
 int main()
 
 {
-	clsMainScreen::ShowMainMenu();
-
+	//clsMainScreen::ShowMainMenu();
+	clsLoginScreen::ShowLoginScreen();
 	system("pause>0");
 	return 0;
 }

@@ -102,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)MyCustomeClasses;$(ProjectDir)Screens\Clients;$(ProjectDir)Screens;$(ProjectDir)Screens\Transactions;$(ProjectDir)Screens\Users;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)MyCustomeClasses;$(ProjectDir)Global;$(ProjectDir)Screens\Clients;$(ProjectDir)Screens;$(ProjectDir)Screens\Transactions;$(ProjectDir)Screens\Users;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,6 +127,8 @@
     <ClCompile Include="Bank-System-OOP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Global\Global.h" />
+    <ClInclude Include="Screens\clsLoginScreen.h" />
     <ClInclude Include="Screens\Clients\clsAddNewClientScreen.h" />
     <ClInclude Include="Screens\Users\clsAddNewUserScreen.h" />
     <ClInclude Include="Screens\Clients\clsBankClient.h" />
@@ -137,12 +139,11 @@
     <ClInclude Include="Screens\Transactions\clsDepositScreen.h" />
     <ClInclude Include="Screens\Clients\clsFindClientScreen.h" />
     <ClInclude Include="Screens\Users\clsFindUserScreen.h" />
-    <ClInclude Include="MyCustomeClasses\clsGlobalTypes.h" />
     <ClInclude Include="MyCustomeClasses\clsInputValidate.h" />
     <ClInclude Include="Screens\clsMainScreen.h" />
     <ClInclude Include="Screens\Users\clsManageUsersScreen.h" />
     <ClInclude Include="MyCustomeClasses\clsPeriod.h" />
-    <ClInclude Include="clsPerson.h" />
+    <ClInclude Include="Global\clsPerson.h" />
     <ClInclude Include="Screens\clsScreen.h" />
     <ClInclude Include="Screens\Transactions\clsShowWithdrawScreen.h" />
     <ClInclude Include="MyCustomeClasses\clsString.h" />
