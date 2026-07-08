@@ -102,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)MyCustomeClasses;$(ProjectDir)Screens\Clients;$(ProjectDir)Screens;$(ProjectDir)Screens\Transactions;$(ProjectDir)Screens\Users;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,32 +127,32 @@
     <ClCompile Include="Bank-System-OOP.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clsAddNewClientScreen.h" />
-    <ClInclude Include="clsAddNewUserScreen.h" />
-    <ClInclude Include="clsBankClient.h" />
-    <ClInclude Include="clsClientListScreen.h" />
-    <ClInclude Include="clsDate.h" />
-    <ClInclude Include="clsDeleteClientScreen.h" />
-    <ClInclude Include="clsDeleteUserScreen.h" />
-    <ClInclude Include="clsDepositScreen.h" />
-    <ClInclude Include="clsFindClientScreen.h" />
-    <ClInclude Include="clsFindUserScreen.h" />
-    <ClInclude Include="clsGlobalTypes.h" />
-    <ClInclude Include="clsInputValidate.h" />
-    <ClInclude Include="clsMainScreen.h" />
-    <ClInclude Include="clsManageUsersScreen.h" />
-    <ClInclude Include="clsPeriod.h" />
+    <ClInclude Include="Screens\Clients\clsAddNewClientScreen.h" />
+    <ClInclude Include="Screens\Users\clsAddNewUserScreen.h" />
+    <ClInclude Include="Screens\Clients\clsBankClient.h" />
+    <ClInclude Include="Screens\Clients\clsClientListScreen.h" />
+    <ClInclude Include="MyCustomeClasses\clsDate.h" />
+    <ClInclude Include="Screens\Clients\clsDeleteClientScreen.h" />
+    <ClInclude Include="Screens\Users\clsDeleteUserScreen.h" />
+    <ClInclude Include="Screens\Transactions\clsDepositScreen.h" />
+    <ClInclude Include="Screens\Clients\clsFindClientScreen.h" />
+    <ClInclude Include="Screens\Users\clsFindUserScreen.h" />
+    <ClInclude Include="MyCustomeClasses\clsGlobalTypes.h" />
+    <ClInclude Include="MyCustomeClasses\clsInputValidate.h" />
+    <ClInclude Include="Screens\clsMainScreen.h" />
+    <ClInclude Include="Screens\Users\clsManageUsersScreen.h" />
+    <ClInclude Include="MyCustomeClasses\clsPeriod.h" />
     <ClInclude Include="clsPerson.h" />
-    <ClInclude Include="clsScreen.h" />
-    <ClInclude Include="clsShowWithdrawScreen.h" />
-    <ClInclude Include="clsString.h" />
-    <ClInclude Include="clsTotalBalancesScreen.h" />
-    <ClInclude Include="clsTransactionsScreen.h" />
-    <ClInclude Include="clsUpdateClientScreen.h" />
-    <ClInclude Include="clsUpdateUserScreen.h" />
-    <ClInclude Include="clsUser.h" />
-    <ClInclude Include="clsUsersListScreen.h" />
-    <ClInclude Include="clsUtil.h" />
+    <ClInclude Include="Screens\clsScreen.h" />
+    <ClInclude Include="Screens\Transactions\clsShowWithdrawScreen.h" />
+    <ClInclude Include="MyCustomeClasses\clsString.h" />
+    <ClInclude Include="Screens\Transactions\clsTotalBalancesScreen.h" />
+    <ClInclude Include="Screens\Transactions\clsTransactionsScreen.h" />
+    <ClInclude Include="Screens\Clients\clsUpdateClientScreen.h" />
+    <ClInclude Include="Screens\Users\clsUpdateUserScreen.h" />
+    <ClInclude Include="Screens\Users\clsUser.h" />
+    <ClInclude Include="Screens\Users\clsUsersListScreen.h" />
+    <ClInclude Include="MyCustomeClasses\clsUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
