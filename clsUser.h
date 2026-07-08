@@ -209,7 +209,7 @@ public:
 	{
 		while (!clsUser::IsUserExist(UserName))
 		{
-			if (ErrorMessage != "") cout << clsUtil::ColorText(ErrorMessage, clsUtil::enColor::RED) << endl;
+			if (ErrorMessage != "") cout << clsUtil::ColorText(ErrorMessage, clsUtil::enColor::BEIGE);
 			UserName = clsInputValidate::ReadString();
 		}
 	}

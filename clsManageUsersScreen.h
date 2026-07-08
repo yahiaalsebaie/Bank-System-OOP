@@ -6,6 +6,7 @@
 #include "clsAddNewUserScreen.h"
 #include "clsDeleteUserScreen.h"
 #include "clsUpdateUserScreen.h"
+#include "clsFindUserScreen.h"
 #include <cstdlib>
 #include <iomanip>
 #include <ios>
@@ -58,8 +59,8 @@ private:
 	}
 	static void _ShowFindUserScreen()
 	{
-		cout << "\n FindUser Screen  Will be here...\n";
-
+		//cout << "\n FindUser Screen  Will be here...\n";
+		clsFindUserScreen::ShowFindUserScreen();
 	}
 
 

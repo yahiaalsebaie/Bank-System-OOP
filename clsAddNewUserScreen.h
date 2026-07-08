@@ -1,8 +1,8 @@
 #pragma once
-#include "clsUser.h"
 #include "clsInputValidate.h"
 #include "clsPerson.h"
 #include "clsScreen.h"
+#include "clsUser.h"
 #include "clsUtil.h"
 #include <iostream>
 #include <string>
@@ -111,7 +111,7 @@ public:
 		}
 
 		clsUser newUser = clsUser::GetAddNewUserObject(UserName);
-		
+
 		_ReadUserInfo(newUser);
 
 		clsUser::enSaveResults saveResult;
