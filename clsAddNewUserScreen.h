@@ -10,7 +10,7 @@
 class clsAddNewUserScreen : protected clsScreen
 {
 
-private:
+protected:
 
 	static short _ReadPermissions()
 	{

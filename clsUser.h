@@ -134,7 +134,7 @@ public:
 	}
 	enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFailedUserNameExists = 2 };
 
-	enum enPermissions {
+	enum enPermissions : short {
 		epShowClientsList = 1, epAddNewClient = 2, epDeleteClient = 4, epUpdateClient = 8, epFindClient = 16, epTransactions = 32, epMangeUsers = 64, epAll = -1
 	};
 
@@ -205,11 +205,11 @@ public:
 		return (!u.IsEmpty());
 	}
 
-	static void PerformIsUserUserNameExist(string& UserName, string ErrorMessage = "\nUser Name is not found, choose another one: ")
+	static void PerformIsUserNameExist(string& UserName, string ErrorMessage = "\nUser Name is not found, choose another one: ")
 	{
 		while (!clsUser::IsUserExist(UserName))
 		{
-			if (ErrorMessage != "") cout << clsUtil::ColorText(ErrorMessage, clsUtil::enColor::ORANGE);
+			if (ErrorMessage != "") cout << clsUtil::ColorText(ErrorMessage, clsUtil::enColor::RED) << endl;
 			UserName = clsInputValidate::ReadString();
 		}
 	}
