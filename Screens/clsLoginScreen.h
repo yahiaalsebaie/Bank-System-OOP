@@ -15,33 +15,8 @@ class clsLoginScreen : private clsScreen
 {
 private:
 
-	static string _PrepareLoginRecord(const clsUser& User, string Separator = "#//#")
-	{
 
-		string DateTime = clsDate::GetSystemDateTimeString();
-		string Record = "";
-
-		Record += DateTime + Separator;
-		Record += User.UserName() + Separator;
-		Record += User.Password + Separator; //Just for learning purposes
-		Record += to_string(User.Permissions);
-
-		return Record;
-	}
-
-	static void _RegisterLogIn()
-	{
-		string RecordLine = _PrepareLoginRecord(CurrentUser);
-
-		fstream myFile;
-		myFile.open("LoginRegister.txt", ios::out | ios::app);
-
-		if (myFile.is_open())
-		{
-			myFile << RecordLine << endl;
-			myFile.close();
-		}
-	}
+	
 
 
 
@@ -83,7 +58,7 @@ private:
 
 
 		} while (loginFailed);
-		_RegisterLogIn();
+		CurrentUser.RegisterLogIn();
 		clsMainScreen::ShowMainMenu();
 		return true;
 	}

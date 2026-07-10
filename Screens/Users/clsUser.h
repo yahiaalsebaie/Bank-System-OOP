@@ -3,6 +3,7 @@
 #include "clsPerson.h"
 #include "clsString.h"
 #include "clsUtil.h"
+#include <clsDate.h>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -47,6 +48,20 @@ private:
 		vector<string> vUserData = clsString::Split(Line, Separator);
 
 		return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2], vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+	}
+
+	  string _PrepareLoginRecord(/*const clsUser& User,*/ string Separator = "#//#")
+	{
+		  bool includeDayName = false;
+		  string DateTime = clsDate::GetSystemDateTimeString(includeDayName);
+		string Record = "";
+
+		Record += DateTime + Separator;
+		Record += _UserName + Separator;
+		Record += _Password + Separator; //Just for learning purposes
+		Record += to_string(_Permissions);
+
+		return Record;
 	}
 
 	static vector<clsUser> _LoadUsersDataFromFile(string FileName = "Users.txt")
@@ -219,8 +234,8 @@ public:
 		switch (_Mode)
 		{
 		case clsUser::EmptyMode:
-			if(IsEmpty())
-			return enSaveResults::svFaildEmptyObject;
+			if (IsEmpty())
+				return enSaveResults::svFaildEmptyObject;
 
 		case clsUser::UpdateMode:
 		{
@@ -276,6 +291,20 @@ public:
 		if (this->Permissions == enPermissions::epAll) return true;
 		if ((this->Permissions & Permission) == Permission) return true;
 		else return false;
+	}
+
+	 void RegisterLogIn()
+	{
+		string RecordLine = _PrepareLoginRecord();
+		
+		fstream myFile;
+		myFile.open("LoginRegister.txt", ios::out | ios::app);
+
+		if (myFile.is_open())
+		{
+			myFile << RecordLine << endl;
+			myFile.close();
+		}
 	}
 
 };
