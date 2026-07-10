@@ -17,10 +17,10 @@ private:
 		{
 			//std::cout << "\n\t\t\t\t Welcome [" << clsUtil::ColorText(CurrentUser.UserName(), clsUtil::enColor::BRIGHT_GREEN) << "]";
 			std::cout << endl << setw(40) << left << "" << "Welcome [" << clsUtil::ColorText(CurrentUser.UserName(), clsUtil::enColor::BRIGHT_GREEN) << "]";
-			std::cout << "\t\t[" << clsUtil::ColorText(clsDate::GetSystemDateToString(), clsUtil::enColor::BRIGHT_GREEN) << "]\n";
+			std::cout << "\t\t[" << clsUtil::ColorText(clsDate::GetSystemDateToString(), clsUtil::enColor::BRIGHT_GREEN) << "]";
 		}
 		else
-			std::cout << "\n\t\t\t\t\t\t\t\t[" << clsUtil::ColorText(clsDate::GetSystemDateToString(), clsUtil::enColor::BRIGHT_GREEN) << "]\n";
+			std::cout << "\n\t\t\t\t\t\t\t\t[" << clsUtil::ColorText(clsDate::GetSystemDateToString(), clsUtil::enColor::BRIGHT_GREEN) << "]";
 
 
 	}
