@@ -3,6 +3,7 @@
 #include "clsDeleteUserScreen.h"
 #include "clsFindUserScreen.h"
 #include "clsInputValidate.h"
+#include "clsLoginRegisterScreen.h"
 #include "clsScreen.h"
 #include "clsUpdateUserScreen.h"
 #include "clsUser.h"
@@ -19,7 +20,7 @@ class clsManageUsersScreen :protected clsScreen
 {
 private:
 	enum class enManageUsersMenuOptions : unsigned char {
-		MainMenu = 0, ListUsers = 1, AddNewUser = 2, DeleteUser = 3, UpdateUser = 4, FindUser = 5,
+		MainMenu = 0, ListUsers = 1, AddNewUser = 2, DeleteUser = 3, UpdateUser = 4, FindUser = 5, LoginRegister = 6
 	};
 
 	static  void _GoBackToManageUsersMenu()
@@ -35,7 +36,7 @@ private:
 		//cout << setw(37) << left << "";
 		string Msg = string(37, ' ') + "Choose what do you want to do?";
 		string ErrorMsg = string(37, ' ') + "Invalid Number, Enter a valid one : ";
-		short Choice = clsInputValidate::ReadNumberInRange(0, 5, Msg,ErrorMsg);
+		short Choice = clsInputValidate::ReadNumberInRange(0, 6, Msg, ErrorMsg);
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return Choice;
 	}
@@ -64,6 +65,11 @@ private:
 	{
 		//cout << "\n FindUser Screen  Will be here...\n";
 		clsFindUserScreen::ShowFindUserScreen();
+	}
+	static void _ShowLoginRegisterScreen()
+	{
+		//cout << "\n LoginRegister Screen  Will be here...\n";
+		clsLoginRegisterScreen::ShowLoginRegistersScreen();
 	}
 
 
@@ -97,6 +103,11 @@ private:
 		case clsManageUsersScreen::enManageUsersMenuOptions::FindUser:
 			system("cls");
 			_ShowFindUserScreen();
+			_GoBackToManageUsersMenu();
+			break;
+		case clsManageUsersScreen::enManageUsersMenuOptions::LoginRegister:
+			system("cls");
+			_ShowLoginRegisterScreen();
 			_GoBackToManageUsersMenu();
 			break;
 		case clsManageUsersScreen::enManageUsersMenuOptions::MainMenu:
@@ -133,6 +144,7 @@ public:
 			cout << setw(37) << left << "" << "\t[3] Delete User.\n";
 			cout << setw(37) << left << "" << "\t[4] Update User.\n";
 			cout << setw(37) << left << "" << "\t[5] Find User.\n";
+			cout << setw(37) << left << "" << "\t[6] Login Register.\n";
 			cout << setw(37) << left << "" << "\t[0] Main Menu.\n";
 
 			cout << setw(37) << left << "" << SeparatorLine;//----------

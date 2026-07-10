@@ -127,6 +127,7 @@
     <ClCompile Include="Bank-System-OOP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clsLoginRegisterScreen.h" />
     <ClInclude Include="Global\Global.h" />
     <ClInclude Include="Screens\clsLoginScreen.h" />
     <ClInclude Include="Screens\Clients\clsAddNewClientScreen.h" />
