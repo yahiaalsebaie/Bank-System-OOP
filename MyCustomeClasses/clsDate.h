@@ -2,9 +2,13 @@
 #pragma warning(disable : 4996)
 #pragma once
 
+#include "clsString.h"
+#include <corecrt.h>
+#include <cstdio>
+#include <ctime>
 #include<iostream>
 #include<string>
-#include "clsString.h"
+#include <vector>
 
 using namespace std;
 
@@ -93,21 +97,41 @@ public:
 	static string GetSystemDateToString(bool includeDayName = true, bool isShortName = true)
 	{
 		clsDate Date;
-		
+
 		short currentDay = DayOfWeekOrder(Date.Day, Date.Month, Date.Year);
-		
+
 		string shortName = DayShortName(currentDay);
-		string longName = DayShortName(currentDay);
-		
-		if(includeDayName)
+		string longName = DayLongName(currentDay);
+
+		if (includeDayName)
 		{
-			if(isShortName)
-			return shortName + " " + to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+			if (isShortName)
+				return shortName + " " + to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 			else
-			return longName + " " + to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+				return longName + " " + to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 		}
 
-		 return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+		return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+	}
+	static string GetSystemDateTimeString(bool includeDayName = true, bool isShortName = true)
+	{
+		time_t t = time(0);
+		tm* now = localtime(&t);
+
+		short hour, minute, second;
+		
+		hour = now->tm_hour;
+		minute = now->tm_min;
+		second = now->tm_sec;
+
+		/*short Day, Month, Year;
+
+		Year = now->tm_year + 1900;
+		Month = now->tm_mon + 1;
+		Day = now->tm_mday;*/
+
+		return GetSystemDateToString(includeDayName, isShortName) + " - " + to_string(hour) + ":" + to_string(minute) + ":" + to_string(second);
+
 	}
 
 	static clsDate GetSystemDate()
@@ -291,6 +315,13 @@ public:
 	static string DayShortName(short DayOfWeekOrder)
 	{
 		string arrDayNames[] = { "Sun","Mon","Tue","Wed","Thu","Fri","Sat" };
+
+		return arrDayNames[DayOfWeekOrder];
+
+	}
+	static string DayLongName(short DayOfWeekOrder)
+	{
+		string arrDayNames[] = { "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday" };
 
 		return arrDayNames[DayOfWeekOrder];
 
