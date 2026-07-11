@@ -314,4 +314,13 @@ public:
 		return true;
 
 	}
+
+	bool Transfer(double Amount, clsBankClient& To)
+	{
+		if (Amount > _AccountBalance) return false;
+
+		this->Withdraw(Amount);
+		To.Deposit(Amount);
+		return true;
+	};
 };

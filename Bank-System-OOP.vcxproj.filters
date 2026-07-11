@@ -104,7 +104,10 @@
     <ClInclude Include="MyCustomeClasses\clsUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="clsLoginRegisterScreen.h">
+    <ClInclude Include="Screens\clsLoginRegisterScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Screens\Transactions\clsTransferScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

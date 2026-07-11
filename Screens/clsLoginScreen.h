@@ -3,10 +3,8 @@
 #include "clsScreen.h";
 #include "clsUser.h";
 #include "Global.h";
-#include <clsDate.h>
 #include <clsUtil.h>
 #include <cstdlib>
-#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -16,7 +14,7 @@ class clsLoginScreen : private clsScreen
 private:
 
 
-	
+
 
 
 
