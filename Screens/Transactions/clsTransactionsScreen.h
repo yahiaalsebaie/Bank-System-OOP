@@ -5,6 +5,7 @@
 #include "clsShowWithdrawScreen.h"
 #include "clsTotalBalancesScreen.h"
 #include "clsTransferScreen.h"
+#include "clsTransfersLogScreen.h"
 #include "clsUtil.h"
 #include <clsUser.h>
 #include <cstdlib>
@@ -18,7 +19,7 @@ class clsTransactionsScreen :protected clsScreen
 {
 private:
 	enum class enTransactionsMenuOptions : unsigned char {
-		MainMenu = 0, Deposit = 1, Withdraw = 2, TotalBalances = 3, Transfer = 4
+		MainMenu = 0, Deposit = 1, Withdraw = 2, TotalBalances = 3, Transfer = 4, TransferLogs = 5
 	};
 
 	static  void _GoBackToTransactionsMenu()
@@ -34,7 +35,7 @@ private:
 		//cout << setw(37) << left << "";
 		string Msg = string(37, ' ') + "Choose what do you want to do?";
 		string ErrorMsg = string(37, ' ') + "Invalid Number, Enter a valid one : ";
-		short Choice = clsInputValidate::ReadNumberInRange(0, 4, Msg,ErrorMsg);
+		short Choice = clsInputValidate::ReadNumberInRange(0, 5, Msg, ErrorMsg);
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return Choice;
 	}
@@ -58,9 +59,14 @@ private:
 		clsTotalBalancesScreen::ShowTotalBalancesScreen();
 	}
 
-	static void _ShowTTransferScreen()
+	static void _ShowTransferScreen()
 	{
 		clsTransferScreen::ShowTransferScreen();
+	}
+
+	static void _ShowTransferLogsScreen()
+	{
+		clsTransfersLogScreen::ShowTransfersLogsScreen();
 	}
 
 
@@ -86,7 +92,12 @@ private:
 			break;
 		case clsTransactionsScreen::enTransactionsMenuOptions::Transfer:
 			system("cls");
-			_ShowTTransferScreen();
+			_ShowTransferScreen();
+			_GoBackToTransactionsMenu();
+			break;
+		case clsTransactionsScreen::enTransactionsMenuOptions::TransferLogs:
+			system("cls");
+			_ShowTransferLogsScreen();
 			_GoBackToTransactionsMenu();
 			break;
 		case clsTransactionsScreen::enTransactionsMenuOptions::MainMenu:
@@ -121,6 +132,7 @@ public:
 			cout << setw(37) << left << "" << "\t[2] Withdraw--.\n";
 			cout << setw(37) << left << "" << "\t[3] Total Balances.\n";
 			cout << setw(37) << left << "" << "\t[4] Transfer.\n";
+			cout << setw(37) << left << "" << "\t[5] Transfer Logs.\n";
 			cout << setw(37) << left << "" << "\t[0] Main Menu.\n";
 			cout << setw(37) << left << "" << SeparatorLine;
 

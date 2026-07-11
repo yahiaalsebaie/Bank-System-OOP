@@ -155,6 +155,58 @@ private:
 		}
 	}
 public:
+	struct stTransferLogRecord
+	{
+		string	 DateTime;
+		string	 SourceAccountNumber;
+		string	 DestinationAccountNumber;
+		double	 TransferAmount;
+		double	 SourceBalanceAfter;
+		double	 DestinationBalanceAfter;
+		string	 UserName;
+	};
+
+private:
+
+	static stTransferLogRecord _ConvertTransferLogLineToRecord(string Line, string Separator = "#//#")
+	{
+		vector<string> DataLine = clsString::Split(Line, Separator);
+
+		stTransferLogRecord Record;
+
+		Record.DateTime = DataLine[0];
+		Record.SourceAccountNumber = DataLine[1];
+		Record.DestinationAccountNumber = DataLine[2];
+		Record.TransferAmount = stoi(DataLine[3]);
+		Record.SourceBalanceAfter = stoi(DataLine[4]);
+		Record.DestinationBalanceAfter = stoi(DataLine[5]);
+		Record.UserName = DataLine[6];
+
+		return Record;
+
+	}
+
+
+
+	string _PrepareTransferLogRecord(clsBankClient ToDestinationClient, double TransferAmount, string Separator = "#//#")
+	{
+		bool includeDayName = false;
+		string DateTime = clsDate::GetSystemDateTimeString(includeDayName);
+		string Record = "";
+		Record += DateTime + Separator;
+		Record += AccountNumber() + Separator;
+		Record += ToDestinationClient.AccountNumber() + Separator;
+		Record += to_string(TransferAmount) + Separator;
+		Record += to_string(_AccountBalance) + Separator;
+		Record += to_string(ToDestinationClient.AccountBalance) + Separator;
+		Record += CurrentUser.UserName();
+
+		return Record;
+	}
+
+
+public:
+
 
 	clsBankClient(enMode Mode, string FirstName, string LastName,
 		string Email, string Phone, string AccountNumber, string PinCode,
@@ -358,5 +410,27 @@ public:
 	};
 
 
+	static vector<stTransferLogRecord> GetTransferRegisterList(string FileName = "TransferRegister.txt")
+	{
+		vector<stTransferLogRecord> vLogins;
+		fstream myFile;
+		myFile.open(FileName, ios::in);//Read (input) mode.
+
+		if (myFile.is_open())
+		{
+			string line;
+			stTransferLogRecord logRecord;
+			while (getline(myFile, line))
+			{
+				if (line == "")
+					continue;
+				logRecord = _ConvertTransferLogLineToRecord(line);
+				vLogins.push_back(logRecord);
+			}
+			myFile.close();
+		}
+		return vLogins;
+
+	}
 
 };

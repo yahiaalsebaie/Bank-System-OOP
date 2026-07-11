@@ -1,6 +1,5 @@
 #pragma once
 #include "clsScreen.h"
-#include "clsString.h"
 #include "clsUser.h"
 #include "clsUtil.h"
 #include <iomanip>
@@ -14,34 +13,6 @@ class clsLoginRegisterScreen :protected clsScreen
 {
 private:
 
-	static vector<string> _ParseLoginLineToRecordFieldsVector(string Line, string Separator = "#//#")
-	{
-		vector<string> vRecord = clsString::Split(Line, Separator);
-
-		return vRecord;
-	}
-
-	//static vector<clsUser> _LoadUsersDataFromFile(string FileName = "LoginRegister.txt")
-	//{
-	//	vector<clsUser> vRecords;
-	//	fstream myFile;
-	//	myFile.open(FileName, ios::in);//Read (input) mode.
-	//	string Record = "";
-	//	if (myFile.is_open())
-	//	{
-	//		string line;
-	//		while (getline(myFile, line))
-	//		{
-	//			if (line == "")
-	//				continue;
-	//			Record = _ParseLoginLineToRecordFieldsVector(line);
-	//			vRecords.push_back(Record);
-	//		}
-	//		myFile.close();
-	//	}
-	//	return vRecords;
-	//}
-
 	static void _PrintLoginRegisterRecordLine(clsUser::stLoginRegisterRecord LoginRegisterRecord)
 	{
 
@@ -49,7 +20,7 @@ private:
 		cout << clsUtil::ColorText("| ", clsUtil::enColor::RED) << left << setw(20) << LoginRegisterRecord.UserName;
 		cout << clsUtil::ColorText("| ", clsUtil::enColor::RED) << left << setw(20) << LoginRegisterRecord.Password;
 		cout << clsUtil::ColorText("| ", clsUtil::enColor::RED) << left << setw(10) << LoginRegisterRecord.Permissions;
-		
+
 	}
 
 
@@ -87,6 +58,7 @@ public:
 		cout << clsUtil::ColorText(SeparatorLine, clsUtil::enColor::YELLOW);
 
 	}
+
 
 };
 

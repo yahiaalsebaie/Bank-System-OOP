@@ -49,7 +49,7 @@ private:
 
 		return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2], vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
 	}
-	
+
 public:
 	struct stLoginRegisterRecord
 	{
@@ -58,6 +58,9 @@ public:
 		string	 Password;
 		short Permissions;
 	};
+
+
+
 private:
 
 	static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Separator = "#//#")
@@ -89,32 +92,33 @@ private:
 
 		return Record;
 	}
-
-	
-	  static vector<clsUser> _LoadUsersDataFromFile(string FileName = "Users.txt")
-	  {
-		  vector<clsUser> vUsers;
-		  fstream myFile;
-		  myFile.open(FileName, ios::in);//Read (input) mode.
-
-		  if (myFile.is_open())
-		  {
-			  string line;
-			  while (getline(myFile, line))
-			  {
-				  if (line == "")
-					  continue;
-				  clsUser User = _ConvertLineToUserObject(line);
-				  vUsers.push_back(User);
-			  }
-			  myFile.close();
-		  }
-		  return vUsers;
-	  }
+	//-----
 
 
-	
-	
+	static vector<clsUser> _LoadUsersDataFromFile(string FileName = "Users.txt")
+	{
+		vector<clsUser> vUsers;
+		fstream myFile;
+		myFile.open(FileName, ios::in);//Read (input) mode.
+
+		if (myFile.is_open())
+		{
+			string line;
+			while (getline(myFile, line))
+			{
+				if (line == "")
+					continue;
+				clsUser User = _ConvertLineToUserObject(line);
+				vUsers.push_back(User);
+			}
+			myFile.close();
+		}
+		return vUsers;
+	}
+
+
+
+
 	static void _SaveUsersDataToFile(const vector<clsUser>& vUsers)
 	{
 		string FileName = "Users.txt";
@@ -338,26 +342,26 @@ public:
 		}
 	}
 
-	
-	 static vector<stLoginRegisterRecord> GetLoginRegisterList(string FileName = "LoginRegister.txt")
-	 {
-		 vector<stLoginRegisterRecord> vLogins;
-		 fstream myFile;
-		 myFile.open(FileName, ios::in);//Read (input) mode.
 
-		 if (myFile.is_open())
-		 {
-			 string line;
-			 stLoginRegisterRecord loginRecord;
-			 while (getline(myFile, line))
-			 {
-				 if (line == "")
-					 continue;
+	static vector<stLoginRegisterRecord> GetLoginRegisterList(string FileName = "LoginRegister.txt")
+	{
+		vector<stLoginRegisterRecord> vLogins;
+		fstream myFile;
+		myFile.open(FileName, ios::in);//Read (input) mode.
+
+		if (myFile.is_open())
+		{
+			string line;
+			stLoginRegisterRecord loginRecord;
+			while (getline(myFile, line))
+			{
+				if (line == "")
+					continue;
 				loginRecord = _ConvertLoginRegisterLineToRecord(line);
-				 vLogins.push_back(loginRecord);
-			 }
-			 myFile.close();
-		 }
-		 return vLogins;
-	 }
+				vLogins.push_back(loginRecord);
+			}
+			myFile.close();
+		}
+		return vLogins;
+	}
 };
