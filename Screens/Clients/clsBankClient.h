@@ -3,7 +3,10 @@
 #include "clsPerson.h"
 #include "clsString.h"
 #include "clsUtil.h"
+#include <clsDate.h>
+#include <clsUser.h>
 #include <fstream>
+#include <Global.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -122,6 +125,35 @@ private:
 		_AddDataLineToFile("Clients.txt", _ConvertClientObjectToLine(*this));
 	}
 
+	string _PrepareTransferRecord(const clsBankClient& To, const double Amount, string Separator = "#//#")
+	{
+		bool includeDayName = false;
+		string DateTime = clsDate::GetSystemDateTimeString(includeDayName);
+		string Record = "";
+
+		Record += DateTime + Separator;
+		Record += this->AccountNumber() + Separator;
+		Record += To.AccountNumber() + Separator;
+		Record += to_string(Amount) + Separator;
+		Record += to_string(this->AccountBalance) + Separator;
+		Record += to_string(To.AccountBalance) + Separator;
+		Record += CurrentUser.UserName();
+
+		return Record;
+	}
+	void _RegisterTransferLog(const clsBankClient& ToDestinationClient, const double Amount, string Separator = "#//#")
+	{
+		string RecordLine = _PrepareTransferRecord(ToDestinationClient, Amount);
+
+		fstream myFile;
+		myFile.open("TransferRegister.txt", ios::out | ios::app);
+
+		if (myFile.is_open())
+		{
+			myFile << RecordLine << endl;
+			myFile.close();
+		}
+	}
 public:
 
 	clsBankClient(enMode Mode, string FirstName, string LastName,
@@ -315,12 +347,16 @@ public:
 
 	}
 
-	bool Transfer(double Amount, clsBankClient& To)
+	bool Transfer(double Amount, clsBankClient& ToDestinationClient)
 	{
-		if (Amount > _AccountBalance) return false;
+		if ((Amount > _AccountBalance) || AccountNumber() == ToDestinationClient.AccountNumber()) return false;
 
 		this->Withdraw(Amount);
-		To.Deposit(Amount);
+		ToDestinationClient.Deposit(Amount);
+		_RegisterTransferLog(ToDestinationClient, Amount);
 		return true;
 	};
+
+
+
 };

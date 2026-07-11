@@ -76,10 +76,10 @@ private:
 	}
 
 
-	  string _PrepareLoginRecord(/*const clsUser& User,*/ string Separator = "#//#")
+	string _PrepareLoginRecord(/*const clsUser& User,*/ string Separator = "#//#")
 	{
-		  bool includeDayName = false;
-		  string DateTime = clsDate::GetSystemDateTimeString(includeDayName);
+		bool includeDayName = false;
+		string DateTime = clsDate::GetSystemDateTimeString(includeDayName);
 		string Record = "";
 
 		Record += DateTime + Separator;
@@ -324,10 +324,10 @@ public:
 		else return false;
 	}
 
-	 void RegisterLogIn()
+	void RegisterLogIn()
 	{
 		string RecordLine = _PrepareLoginRecord();
-		
+
 		fstream myFile;
 		myFile.open("LoginRegister.txt", ios::out | ios::app);
 
