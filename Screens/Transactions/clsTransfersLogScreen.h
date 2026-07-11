@@ -34,7 +34,7 @@ public:
 	{
 
 		vector <clsBankClient::stTransferLogRecord> stRecords = clsBankClient::GetTransferRegisterList();
-		string SeparatorLine = "\n_________________________________________________________________________________________________________\n";
+		string SeparatorLine = "\n_____________________________________________________________________________________________________________\n";
 		string NumberOfRecords = to_string(stRecords.size());
 
 		string subTitle = clsUtil::ColorText("\t    [", clsUtil::enColor::RED) + clsUtil::ColorText(NumberOfRecords, clsUtil::enColor::YELLOW) + clsUtil::ColorText("]", clsUtil::enColor::RED) + " Record(s).";
