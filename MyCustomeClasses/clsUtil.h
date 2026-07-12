@@ -264,14 +264,14 @@ public:
 		return rand() % (To - From + 1) + From;
 	}
 
-	static string EncryptText(std::string txt, short Key)
+	static string EncryptText(std::string txt, short Key = 2)
 	{
 		for (size_t i = 0; i < txt.length(); i++)
 			txt[i] += Key;
 		return txt;
 	}
 
-	static string DecryptText(std::string txt, short Key)
+	static string DecryptText(std::string txt, short Key = 2)
 	{
 		for (size_t i = 0; i < txt.length(); i++)
 			txt[i] -= Key;

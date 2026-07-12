@@ -11,7 +11,6 @@ int main()
 	{
 		if (!clsLoginScreen::ShowLoginScreen()) break;
 	}
-	
 	system("pause>0");
 	return 0;
 }

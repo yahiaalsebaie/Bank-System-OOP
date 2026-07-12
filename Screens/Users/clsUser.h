@@ -36,7 +36,7 @@ private:
 		UserObj += User.Email + Separator;
 		UserObj += User.Phone + Separator;
 		UserObj += User.UserName() + Separator;
-		UserObj += User.Password + Separator;
+		UserObj += clsUtil::EncryptText(User.Password) + Separator;
 		UserObj += to_string(User.Permissions);
 
 		return UserObj;
@@ -47,7 +47,7 @@ private:
 	{
 		vector<string> vUserData = clsString::Split(Line, Separator);
 
-		return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2], vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+		return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2], vUserData[3], vUserData[4], clsUtil::DecryptText(vUserData[5]), stoi(vUserData[6]));
 	}
 
 public:
@@ -71,7 +71,8 @@ private:
 
 		Record.DateTime = DataLine[0];
 		Record.UserName = DataLine[1];
-		Record.Password = DataLine[2];
+		Record.Password = clsUtil::DecryptText(DataLine[2]);
+		Record.Password = clsUtil::DecryptText(DataLine[2]);
 		Record.Permissions = stoi(DataLine[3]);
 
 		return Record;
@@ -87,7 +88,7 @@ private:
 
 		Record += DateTime + Separator;
 		Record += _UserName + Separator;
-		Record += _Password + Separator; //Just for learning purposes
+		Record += clsUtil::EncryptText(_Password)+ Separator; //Just for learning purposes
 		Record += to_string(_Permissions);
 
 		return Record;
@@ -237,8 +238,10 @@ public:
 			string line;
 			while (getline(myFile, line))
 			{
+				//string EncryptedPassword = clsUtil::EncryptText(Password);
 				clsUser User = _ConvertLineToUserObject(line);
-				if (User.UserName() == UserName && User.Password == Password)
+			//	if ((User.UserName() == UserName) && User.Password == EncryptedPassword)
+				if ((User.UserName() == UserName) && User.Password == Password)
 				{
 					myFile.close();
 					return User;
@@ -364,4 +367,7 @@ public:
 		}
 		return vLogins;
 	}
+	
 };
+
+

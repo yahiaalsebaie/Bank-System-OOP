@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "clsMainScreen.h";
 #include "clsScreen.h";
 #include "clsUser.h";
@@ -50,7 +50,8 @@ private:
 			cout << "Enter Password: ";
 			cin >> Password;
 
-			CurrentUser = clsUser::Find(userName, Password);
+			CurrentUser = clsUser::Find(userName,Password);
+			//CurrentUser = clsUser::Find(userName, clsUtil::DecryptText(Password, 2));
 
 			loginFailed = CurrentUser.IsEmpty();
 
