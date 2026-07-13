@@ -252,7 +252,7 @@ public:
 
 	static clsBankClient Find(const string& AccountNumber)
 	{
-		vector<clsBankClient> vClients;
+		//vector<clsBankClient> vClients;
 
 		fstream myFile;
 		myFile.open("Clients.txt", ios::in); //Read mode
@@ -268,14 +268,14 @@ public:
 					myFile.close();
 					return client;
 				}
-				vClients.push_back(client);
+				//vClients.push_back(client);
 			}
 		}
 		return _GetEmptyClientObject();
 	}
 	static clsBankClient Find(const string& AccountNumber, const string& PinCode)
 	{
-		vector<clsBankClient> vClients;
+		//vector<clsBankClient> vClients;
 
 		fstream myFile;
 		myFile.open("Clients.txt", ios::in); //Read mode
@@ -291,7 +291,7 @@ public:
 					myFile.close();
 					return client;
 				}
-				vClients.push_back(client);
+				//vClients.push_back(client);
 			}
 		}
 		return _GetEmptyClientObject();
