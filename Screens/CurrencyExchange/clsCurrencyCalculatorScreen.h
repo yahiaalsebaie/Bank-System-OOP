@@ -51,10 +51,10 @@ public:
 			double  AmountInUSD = Currency1.ConvertToUSD(amount);
 			double  FinalAmount =	Currency1.ConvertTo(amount, Currency2);
 
-			_PrintCurrency(Currency1, "\n\n[Converted From " + Currency1.CurrencyCode() + " to USD]");
 
 			if (Currency1.CurrencyCode() != "USD")
 			{
+			_PrintCurrency(Currency1, "\n\n[Converted From " + Currency1.CurrencyCode() + " to USD]");
 				cout << amount << " " << Currency1.CurrencyCode() << " = " << Currency1.ConvertToUSD(amount) << " USD\n";
 
 			}
