@@ -263,6 +263,8 @@ public:
 	double  ConvertToUSD(double  amount) { return  amount / _Rate; }
 	double  ConvertTo(double  amount, const clsCurrency& TargetCurrency)
 	{
+		if (TargetCurrency.CurrencyCode() == "USD") return ConvertToUSD(amount);
+
 		return ConvertToUSD(amount) * TargetCurrency.Rate();
 	}
 };
