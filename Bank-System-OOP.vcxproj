@@ -127,6 +127,7 @@
     <ClCompile Include="Bank-System-OOP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Screens\clsCurrency.h" />
     <ClInclude Include="Screens\Transactions\clsTransfersLogScreen.h" />
     <ClInclude Include="Screens\clsLoginRegisterScreen.h" />
     <ClInclude Include="Screens\Transactions\clsTransferScreen.h" />
