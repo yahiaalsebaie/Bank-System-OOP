@@ -200,16 +200,16 @@ public:
 
 	static bool IsCurrencyExist(string CurrencyCode)
 	{
-		clsCurrency c = clsCurrency::FindByCode(CurrencyCode);
+		clsCurrency c = clsCurrency::FindByCode(clsString::UpperAllString(CurrencyCode));
 		return (!c.IsEmpty());
 	}
 	static bool IsCurrencyExistByCountryName(string Country)
 	{
-		clsCurrency c = clsCurrency::FindByCountry(Country);
+		clsCurrency c = clsCurrency::FindByCountry(clsString::UpperAllString(Country));
 		return (!c.IsEmpty());
 	}
 
-	static void PerformIsCurrencyCountryExist(string Country, string ErrorMessage = "\nCountry is not found, choose another one: ")
+	static void PerformIsCurrencyCountryExist(string& Country, string ErrorMessage = "\nCountry is not found, choose another one: ")
 	{
 		while (!clsCurrency::IsCurrencyExistByCountryName(Country))
 		{
@@ -217,9 +217,9 @@ public:
 			Country = clsInputValidate::ReadString();
 		}
 	}
-	static void PerformIsCurrencyCodeExist(string CurrencyCode, string ErrorMessage = "\nCurrency Code is not found, choose another one: ")
+	static void PerformIsCurrencyCodeExist(string& CurrencyCode, string ErrorMessage = "\nCurrency Code is not found, choose another one: ")
 	{
-		while (!clsCurrency::IsCurrencyExist(CurrencyCode))
+		while (!clsCurrency::IsCurrencyExist((CurrencyCode)))
 		{
 			if (ErrorMessage != "") cout << clsUtil::ColorText(ErrorMessage, clsUtil::enColor::ORANGE);
 			CurrencyCode = clsInputValidate::ReadString();

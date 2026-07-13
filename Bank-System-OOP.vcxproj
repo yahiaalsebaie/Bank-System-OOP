@@ -102,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)MyCustomeClasses;$(ProjectDir)Global;$(ProjectDir)Screens\Clients;$(ProjectDir)Screens;$(ProjectDir)Screens\Transactions;$(ProjectDir)Screens\Users;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)MyCustomeClasses;$(ProjectDir)Global;$(ProjectDir)Screens\Clients;$(ProjectDir)Screens;$(ProjectDir)Screens\Transactions;$(ProjectDir)Screens\Users;$(ProjectDir)Screens\CurrencyExchange;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,6 +127,9 @@
     <ClCompile Include="Bank-System-OOP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Screens\CurrencyExchange\clsFindCurrencyScreen.h" />
+    <ClInclude Include="Screens\CurrencyExchange\clsCurrenciesListScreen.h" />
+    <ClInclude Include="Screens\CurrencyExchange\clsCurrencyExchangeMainScreen.h" />
     <ClInclude Include="Screens\clsCurrency.h" />
     <ClInclude Include="Screens\Transactions\clsTransfersLogScreen.h" />
     <ClInclude Include="Screens\clsLoginRegisterScreen.h" />

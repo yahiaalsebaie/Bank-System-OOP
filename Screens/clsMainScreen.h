@@ -4,6 +4,7 @@
 #include "Clients/clsDeleteClientScreen.h"
 #include "Clients/clsFindClientScreen.h"
 #include "Clients/clsUpdateClientScreen.h"
+#include "clsCurrencyExchangeMainScreen.h"
 #include "clsInputValidate.h"
 #include "clsUser.h"
 #include "clsUtil.h"
@@ -29,7 +30,7 @@ private:
 	enum class enMainMenuOptions : unsigned char {
 		eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
 		eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenu = 6,
-		eManageUsers = 7, eLogout = 0
+		eManageUsers = 7, eCurrencyExchange = 8, eLogout = 0
 	};
 
 	static short _ReadMainMenuOption()
@@ -37,7 +38,7 @@ private:
 		//cout << setw(37) << left << "";
 		string Msg = string(37, ' ') + "Choose what do you want to do?";
 		string ErrorMsg = string(37, ' ') + "Invalid Number, Enter a valid one : ";
-		short Choice = clsInputValidate::ReadNumberInRange(0, 7, Msg, ErrorMsg);
+		short Choice = clsInputValidate::ReadNumberInRange(0, 8, Msg, ErrorMsg);
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return Choice;
 	}
@@ -90,6 +91,11 @@ private:
 	{
 		//cout << "\nUsers Menu Will be here...\n";
 		clsManageUsersScreen::ShowManageUsersMenu();
+	}
+	static void _ShowCurrencyExchangeMenu()
+	{
+		clsCurrencyExchangeMainScreen::ShowCurrencyExchangeMenu();
+
 	}
 
 	static void _ShowLogoutScreen()
@@ -146,6 +152,12 @@ private:
 			_GoBackToMainMenu();
 			break;
 
+		case enMainMenuOptions::eCurrencyExchange:
+			system("cls");
+			_ShowCurrencyExchangeMenu();
+			_GoBackToMainMenu();
+			break;
+
 		case enMainMenuOptions::eLogout:
 			system("cls");
 			_ShowLogoutScreen();
@@ -179,6 +191,7 @@ public:
 			cout << setw(37) << left << "" << "\t[5] Find Client.\n";
 			cout << setw(37) << left << "" << "\t[6] Transactions.\n";
 			cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
+			cout << setw(37) << left << "" << "\t[8] Currency Exchange.\n";
 			cout << setw(37) << left << "" << "\t[0] Logout.\n";
 			cout << setw(37) << left << "" << SeparatorLine;
 
