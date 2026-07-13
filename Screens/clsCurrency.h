@@ -106,19 +106,17 @@ private:
 		{
 			if (c.CurrencyCode() == CurrencyCode())
 			{
-				c = *this; // *this == updated information
-				break;
+			// Don't use (c = *this) because multiple countries can share the same currency code like (EUR) 
+			//	c = *this; // *this == updated information
+			//break; // Don't use (break) because all countries using the same currency code
+			// Updating the whole object would overwrite country specific data and that is data corrupted.
+			
+			// should receive the updated exchange rate.
+				c._Rate = _Rate; 
 			}
 		}
 		_SaveCurrenciesDataToFile(vCurrencies);
-
-
 	}
-
-	/*void _AddNew()
-	{
-		_AddDataLineToFile("Currencies.txt", _ConvertCurrencyObjectToLine(*this));
-	}*/
 
 
 public:

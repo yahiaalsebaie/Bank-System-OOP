@@ -43,13 +43,13 @@ public:
 			clsCurrency Currency1 = _ReadCurrencyCode("\nPlease Enter Currency 1 Code: ");
 			clsCurrency Currency2 = _ReadCurrencyCode("\nPlease Enter Currency 2 Code: ");
 
-			float amount = clsInputValidate::ReadFloatNumber("\nEnter Amount to Exchange: ");
+			double  amount = clsInputValidate::ReadDblNumber("\nEnter Amount to Exchange: ");
 
-			//float AmountInUSD = amount / Currency1.Rate();
-			//float  FinalAmount = AmountInUSD * Currency2.Rate();
+			//double  AmountInUSD = amount / Currency1.Rate();
+			//double   FinalAmount = AmountInUSD * Currency2.Rate();
 
-			float AmountInUSD = Currency1.ConvertToUSD(amount);
-			float FinalAmount =	Currency1.ConvertTo(amount, Currency2);
+			double  AmountInUSD = Currency1.ConvertToUSD(amount);
+			double  FinalAmount =	Currency1.ConvertTo(amount, Currency2);
 
 			_PrintCurrency(Currency1, "\n\n[Converted From " + Currency1.CurrencyCode() + " to USD]");
 

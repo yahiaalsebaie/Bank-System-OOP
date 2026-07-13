@@ -11,7 +11,7 @@ Argentina#//#ARS#//#Argentine Peso#//#171.744995
 Armenia#//#AMD#//#Armenian Dram#//#391.700012
 Aruba#//#AWG#//#Aruban Guilder#//#1.790000
 Australia#//#AUD#//#Australian Dollar#//#1.451000
-Austria#//#EUR#//#Euro#//#0.938000
+Austria#//#EUR#//#Euro#//#0.880000
 Azerbaijan#//#AZN#//#Azerbaijan Manat#//#1.694000
 Bahamas#//#BSD#//#Bahamian Dollar#//#1.000000
 Bahrain#//#BHD#//#Bahraini Dinar#//#0.377000
