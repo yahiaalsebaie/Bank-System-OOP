@@ -18,13 +18,14 @@ private:
 	string _CurrencyCode;
 	string _CurrencyName;
 	float _Rate;
+	bool _MarkForEdit = false;
 
 	static string _ConvertCurrencyObjectToLine(const clsCurrency& Currency, string Separator = "#//#")
 	{
 		string CurrencyObj = "";
-		CurrencyObj += Currency._Country + Separator;
-		CurrencyObj += Currency._CurrencyCode + Separator;
-		CurrencyObj += Currency._CurrencyName + Separator;
+		CurrencyObj += Currency.Country() + Separator;
+		CurrencyObj += Currency.CurrencyCode() + Separator;
+		CurrencyObj += Currency.CurrencyName() + Separator;
 		CurrencyObj += to_string(Currency._Rate);
 
 		return CurrencyObj;
@@ -33,9 +34,12 @@ private:
 
 	static clsCurrency _ConvertLineToCurrencyObject(string Line, string Separator = "#//#")
 	{
-		vector<string> vCurrencyData = clsString::Split(Line, Separator);
+		vector<string> vCurrencyData;
+		vCurrencyData = clsString::Split(Line, Separator);
 
-		return clsCurrency(enMode::UpdateMode, vCurrencyData[0], vCurrencyData[1], vCurrencyData[2], stof(vCurrencyData[3]));
+		return clsCurrency(enMode::UpdateMode, vCurrencyData[0], vCurrencyData[1], vCurrencyData[2],
+			stod(vCurrencyData[3]));
+
 	}
 
 	static clsCurrency _GetEmptyCurrencyObject()
@@ -62,26 +66,26 @@ private:
 		}
 		return vCurrencies;
 	}
-	//static void _SaveCurrenciesDataToFile(const vector<clsCurrency>& vCurrencies)
-	//{
-	//	string FileName = "Currencies.txt";
-	//	fstream myFile;
-	//	myFile.open(FileName, ios::out);
+	static void _SaveCurrenciesDataToFile(const vector<clsCurrency>& vCurrencies)
+	{
+		string FileName = "Currencies.txt";
+		fstream myFile;
+		myFile.open(FileName, ios::out);
+		string line;
 
-	//	if (myFile.is_open())
-	//	{
-	//		string line;
-	//		for (const clsCurrency& c : vCurrencies)
-	//		{
-	//			if (c._MarkForDelete == false)
-	//			{
-	//				line = _ConvertCurrencyObjectToLine(c);
-	//				myFile << line << endl;
-	//			}
-	//		}
-	//		myFile.close();
-	//	}
-	//}
+		if (myFile.is_open())
+		{
+			for (const clsCurrency& c : vCurrencies)
+			{
+				if (c._MarkForEdit == false)
+				{
+					line = _ConvertCurrencyObjectToLine(c);
+					myFile << line << endl;
+				}
+			}
+			myFile.close();
+		}
+	}
 
 	static void _AddDataLineToFile(string FileName, const string DataLine)
 	{
@@ -96,9 +100,9 @@ private:
 	}
 	void _Update()
 	{
-		vector <clsCurrency> _vCurrencies = _LoadCurrenciesDataFromFile("Currencies.txt");
+		vector <clsCurrency> vCurrencies = _LoadCurrenciesDataFromFile("Currencies.txt");
 
-		for (clsCurrency& c : _vCurrencies)
+		for (clsCurrency& c : vCurrencies)
 		{
 			if (c.CurrencyCode() == CurrencyCode())
 			{
@@ -106,7 +110,9 @@ private:
 				break;
 			}
 		}
-		//_SaveCurrenciesDataToFile(_vCurrencies);
+		_SaveCurrenciesDataToFile(vCurrencies);
+
+
 	}
 
 	/*void _AddNew()
@@ -140,7 +146,7 @@ public:
 		_Update();
 	}
 
-	float Rate() /*const*/ { return _Rate; }
+	float Rate() const { return _Rate; }
 
 	static clsCurrency FindByCountry(string Country)
 	{
@@ -157,7 +163,7 @@ public:
 			while (getline(myFile, line))
 			{
 				clsCurrency Currency = _ConvertLineToCurrencyObject(line);
-				if (Currency.Country() == Country)
+				if (clsString::UpperAllString(Currency.Country()) == Country)
 				{
 					myFile.close();
 					return Currency;
@@ -205,7 +211,7 @@ public:
 
 	static void PerformIsCurrencyCountryExist(string Country, string ErrorMessage = "\nCountry is not found, choose another one: ")
 	{
-		while (!clsCurrency::IsCurrencyExist(Country))
+		while (!clsCurrency::IsCurrencyExistByCountryName(Country))
 		{
 			if (ErrorMessage != "") cout << clsUtil::ColorText(ErrorMessage, clsUtil::enColor::ORANGE);
 			Country = clsInputValidate::ReadString();
@@ -255,7 +261,7 @@ public:
 		return _LoadCurrenciesDataFromFile();
 	}
 
-	
+
 
 
 };
