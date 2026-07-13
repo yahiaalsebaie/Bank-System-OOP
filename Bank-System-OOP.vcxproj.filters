@@ -125,5 +125,8 @@
     <ClInclude Include="Screens\CurrencyExchange\clsFindCurrencyScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\CurrencyExchange\clsUpdateCurrencyRateScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,10 +1,10 @@
 #pragma once
 //#include "clsCurrencyCalculatorScreen.h"
+#include "clsCurrenciesListScreen.h"
 #include "clsFindCurrencyScreen.h"
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsUpdateCurrencyRateScreen.h"
-#include "clsCurrenciesListScreen.h"
 #include "clsUser.h"
 #include "clsUtil.h"
 #include <cstdlib>
