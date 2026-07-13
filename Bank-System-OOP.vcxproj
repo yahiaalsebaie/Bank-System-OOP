@@ -127,6 +127,7 @@
     <ClCompile Include="Bank-System-OOP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Screens\CurrencyExchange\clsCurrencyCalculatorScreen.h" />
     <ClInclude Include="Screens\CurrencyExchange\clsUpdateCurrencyRateScreen.h" />
     <ClInclude Include="Screens\CurrencyExchange\clsFindCurrencyScreen.h" />
     <ClInclude Include="Screens\CurrencyExchange\clsCurrenciesListScreen.h" />

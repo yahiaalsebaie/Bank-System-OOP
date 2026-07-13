@@ -1,5 +1,5 @@
 #pragma once
-//#include "clsCurrencyCalculatorScreen.h"
+#include "clsCurrencyCalculatorScreen.h"
 #include "clsCurrenciesListScreen.h"
 #include "clsFindCurrencyScreen.h"
 #include "clsInputValidate.h"
@@ -57,7 +57,7 @@ private:
 	static void _ShowCurrencyCalculatorScreen()
 	{
 		//cout << "\n CurrencyCalculator Screen  Will be here...\n";
-		//clsCurrencyCalculatorScreen::ShowCurrencyCalculatorScreen();
+		clsCurrencyCalculatorScreen::ShowCurrencyCalculatorScreen();
 	}
 
 
