@@ -34,7 +34,7 @@ private:
 		//cout << setw(37) << left << "";
 		string Msg = string(37, ' ') + "Choose what do you want to do?";
 		string ErrorMsg = string(37, ' ') + "Invalid Number, Enter a valid one : ";
-		short Choice = clsInputValidate::ReadNumberInRange(0, 4, Msg, ErrorMsg);
+		short Choice = clsInputValidate::ReadNumberInRange(0, 4, Msg, "\n" + ErrorMsg);
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return Choice;
 	}

@@ -45,14 +45,17 @@ public:
 
 			float amount = clsInputValidate::ReadFloatNumber("\nEnter Amount to Exchange: ");
 
-			float AmountInUSD = amount / Currency1.Rate();
-			float  FinalAmount = AmountInUSD * Currency2.Rate();;
+			//float AmountInUSD = amount / Currency1.Rate();
+			//float  FinalAmount = AmountInUSD * Currency2.Rate();
+
+			float AmountInUSD = Currency1.ConvertToUSD(amount);
+			float FinalAmount =	Currency1.ConvertTo(amount, Currency2);
 
 			_PrintCurrency(Currency1, "\n\n[Converted From " + Currency1.CurrencyCode() + " to USD]");
 
 			if (Currency1.CurrencyCode() != "USD")
 			{
-				cout << amount << " " << Currency1.CurrencyCode() << " = " << AmountInUSD << " USD\n";
+				cout << amount << " " << Currency1.CurrencyCode() << " = " << Currency1.ConvertToUSD(amount) << " USD\n";
 
 			}
 
@@ -65,7 +68,7 @@ public:
 
 
 
-			cout << clsUtil::ColorText("\nDo you want to perform another calculation [Y/N]", clsUtil::enColor::GOLD);
+			cout << clsUtil::ColorText("\nDo you want to perform another calculation [Y/N] : ", clsUtil::enColor::GOLD);
 			cin >> Answer;
 		} while (Answer == 'y' || Answer == 'Y' || Answer == '1');
 

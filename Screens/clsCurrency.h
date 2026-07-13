@@ -17,7 +17,7 @@ private:
 	string _Country;
 	string _CurrencyCode;
 	string _CurrencyName;
-	float _Rate;
+	double  _Rate;
 	bool _MarkForEdit = false;
 
 	static string _ConvertCurrencyObjectToLine(const clsCurrency& Currency, string Separator = "#//#")
@@ -124,7 +124,7 @@ private:
 public:
 
 	clsCurrency(enMode Mode, string Country, string CurrencyCode, string CurrencyName,
-		float Rate)
+		double  Rate)
 	{
 		_Mode = Mode;
 		_Country = Country;
@@ -140,13 +140,13 @@ public:
 	string CurrencyCode() const { return _CurrencyCode; }
 	string CurrencyName() const { return _CurrencyName; }
 
-	void UpdateRate(float newRate)
+	void UpdateRate(double  newRate)
 	{
 		_Rate = newRate;
 		_Update();
 	}
 
-	float Rate() const { return _Rate; }
+	double  Rate() const { return _Rate; }
 
 	static clsCurrency FindByCountry(string Country)
 	{
@@ -262,6 +262,9 @@ public:
 	}
 
 
-
-
+	double  ConvertToUSD(double  amount) { return  amount / _Rate; }
+	double  ConvertTo(double  amount, const clsCurrency& TargetCurrency)
+	{
+		return ConvertToUSD(amount) * TargetCurrency.Rate();
+	}
 };
