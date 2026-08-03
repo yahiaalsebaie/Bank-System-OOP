@@ -77,6 +77,21 @@ For quick auditing and interactive verification of the system's operational feat
 4. Press `F5` to execute the terminal banking platform.
 
 ---
+
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013255" src="https://github.com/user-attachments/assets/ff85417d-d5c0-4b67-8a89-2c4119d2b474" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013318" src="https://github.com/user-attachments/assets/82973662-0a8a-4195-ab52-96fede62c377" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013510" src="https://github.com/user-attachments/assets/ca99529c-772c-4879-9af3-79adef2a0ee5" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013528" src="https://github.com/user-attachments/assets/b59846ff-6e8a-42cc-ae98-e1fcdc33b8ce" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013557" src="https://github.com/user-attachments/assets/28f3aef2-b84b-4284-bd07-f7ff4f99b0cd" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013615" src="https://github.com/user-attachments/assets/d5cd220f-5985-488f-943b-5a76a40fa9fd" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013700" src="https://github.com/user-attachments/assets/48267f04-806e-464a-b1eb-2abee7f274a1" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013207" src="https://github.com/user-attachments/assets/489a66d4-19af-4efd-baf1-2cdaa9ce6e95" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013217" src="https://github.com/user-attachments/assets/0426e4e9-4fae-46e8-a791-8236abc28d41" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013227" src="https://github.com/user-attachments/assets/23bb4f88-6965-41f7-9a63-cda8078717d4" />
+<img width="1483" height="852" alt="Screenshot 2026-08-04 013243" src="https://github.com/user-attachments/assets/9bb25f7d-07a6-4a21-bf28-7657afe1d5f0" />
+
+
+---
 ## 💻 Related Projects
 
 If you'd like to explore more of my C++ journey and see how I build data structures, algorithms, and complete applications from scratch, check out these repositories.
